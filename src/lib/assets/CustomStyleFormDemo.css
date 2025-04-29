@@ -1,0 +1,167 @@
+/* CustomStyleFormDemo.css */
+/* Utility and custom classes for Custom Field Styling demo. */
+
+/* Label utilities */
+.dfutils__label_right { text-align: right !important; }
+.dfutils__label_bold { font-weight: 700 !important; }
+.dfutils__label_green { color: #299956 !important; }
+.dfutils__label_orange { color: #ff7700 !important; }
+
+/* Input background/border */
+.dfutils__bg_lightblue { background: #F0F7FD !important; }
+.dfutils__bg_yellow { background: #fffbe6 !important; }
+.dfutils__border_blue { border: 2px solid #53a2ec !important; }
+.dfutils__border_orange { border: 2px solid #ff7700 !important; }
+.dfutils__rounded_lg { border-radius: 1em !important; }
+.dfutils__font_big { font-size: 1.13em !important; }
+
+/* Blue Focus Ring */
+.dfutils__focus_ring_blue:focus,
+.dfutils__focus_ring_blue:focus-visible {
+    box-shadow: 0 0 0 2px #53a2ec !important;
+    border-color: #53a2ec !important;
+}
+
+/* Green Focus Ring */
+.dfutils__focus_ring_green:focus,
+.dfutils__focus_ring_green:focus-visible {
+    box-shadow: 0 0 0 2px #27ae60 !important;
+    border-color: #27ae60 !important;
+}
+
+/* Orange Focus Ring */
+.dfutils__focus_ring_orange:focus,
+.dfutils__focus_ring_orange:focus-visible {
+    box-shadow: 0 0 0 2px #ff9800 !important;
+    border-color: #ff9800 !important;
+}
+
+/* Red Focus Ring */
+.dfutils__focus_ring_red:focus,
+.dfutils__focus_ring_red:focus-visible {
+    box-shadow: 0 0 0 2px #e02a2a !important;
+    border-color: #e02a2a !important;
+}
+
+
+/* Custom error message */
+.dfutils__error_red_shadow {
+    color: #d62e2e !important;
+    /*background: #fff6f6 !important;*/
+    border-radius: 0.4em;
+    padding: 0.4em 0.9em !important;
+    font-weight: 600;
+    /*box-shadow: 0 2px 8px #ffd4d4;*/
+}
+
+.my-dropdown-bg-blue    { background: #d8ecff !important; }
+.my-dropdown-option-white { color: #444 !important; }
+.my-dropdown-option-active { background: #53a2ec !important; color: #fff !important; }
+
+.my-dropdown-bg-red{
+    background: darkred!important;
+}
+.my-dropdown-item{
+    color: yellow!important;
+}
+.my-dropdown-option:hover {
+    background: #53a2ec !important; color: #fff !important;
+}
+
+.my-dropdown-input {
+    background: darkgreen !important;
+    color: #fff !important;
+}
+
+/* Select/Multi-select custom dropdown style */
+.dfutils__select_dropdown_custom {
+    max-height: 12em;
+    overflow-y: auto;
+    border: 2px solid #ff7700 !important;
+    border-radius: 0.5em !important;
+    box-shadow: 0 2px 8px #ffe7c2;
+}
+
+/* Multi-select tag + remove button */
+.dfutils__tag_purple { background: #a385e0 !important; color: #fff !important; }
+.dfutils__tag_remove_big { font-size: 1.3em !important; color: #fff !important; }
+
+/* Icon color for inset icon */
+.dfutils__icon_icon {
+    height: 1.5em!important;
+    width: 1.5em!important;
+    color: #e02a2a !important;
+}
+.dfutils__icon_icon {
+    height: 1.5em!important;
+    width: 1.5em!important;
+    color: #0ba5c0 !important;
+}
+.dfutils__icon_path1 {
+    fill: #2ae0d1 !important;
+    /*stroke: #e02a2a !important;*/
+}
+.dfutils__icon_path2 {
+    fill: #2ae0d1 !important;
+    /*stroke: #e02a2a !important;*/
+
+}
+/* Custom green submit button */
+.dfutils__submit_green {
+    background: #2dcc7a !important;
+    color: #fff !important;
+    border: none !important;
+    font-size: 1.15em;
+    border-radius: 0.5em;
+    font-weight: 700;
+    transition: background 0.2s;
+}
+.dfutils__submit_green:hover {
+    background: #24a662 !important;
+}
+.dfutils__submit_green:focus {
+    background: #24a662 !important;
+}
+/* Example: user-defined class for textarea field (totally unique look) */
+.my-bio-field-class {
+    background: #fff6da !important;
+    color: #895c00 !important;
+    border: 2px dashed #ffc300 !important;
+    min-height: 5em;
+    border-radius: 0.7em;
+    font-family: monospace;
+    font-size: 1.13em;
+    padding: 1.2em 1.5em !important;
+}
+
+/* Rainbow background for dropdown menu */
+.rainbow-dropdown-bg {
+    background: linear-gradient(90deg, #ff3e3e 0%, #ffb347 20%, #ffff5e 40%, #53e453 60%, #53a2ec 80%, #b388ff 100%);
+    border: 2px solid #fff;
+    padding: 0.5em;
+    border-radius: 1em;
+}
+
+/* Each option looks bold, white with a shadow, changes on hover */
+.rainbow-dropdown-item {
+    color: #fff !important;
+    font-weight: bold !important;
+    text-shadow: 0 2px 6px rgba(50,50,50,0.18);
+    padding: 0.8em 1.1em;
+    border-radius: 0.6em;
+    transition: background 0.2s;
+    cursor: pointer;
+}
+.rainbow-dropdown-item:hover {
+    background: rgba(0,0,0,0.11);
+}
+
+/* Selected option: extra glow & scale effect */
+.rainbow-dropdown-selected {
+    background: #fff !important;
+    color: #222 !important;
+    font-size: 1.15em;
+    box-shadow: 0 0 8px 2px #ffb34777, 0 0 0.2em #ff3e3e66;
+    transform: scale(1.05);
+    transition: background 0.12s, color 0.12s, transform 0.12s;
+}

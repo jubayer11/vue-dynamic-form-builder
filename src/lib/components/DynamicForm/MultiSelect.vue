@@ -1,180 +1,187 @@
 <template>
-  <div
-      ref="multiselectRef"
-      class="relative z-20 w-full"
-  >
-    <div @click="dropDown"
-         :class="[
-             multiSelectClass?.field,
-             customMultiSelectClass?.field,
-             uniqueStyle?.field,
-             multiSelectClass?.labelAndIcon?.wrapper,
-             customMultiSelectClass?.labelAndIcon?.wrapper,
-             uniqueStyle?.labelAndIcon?.wrapper,
-             {'textField__default__error':hasError}
-             ]"
-         tabindex="0"
-    >
+  <div ref="multiselectRef"
+       :class="[
+        multiSelectClass?.mainWrapper,
+        customMultiSelectClass?.mainWrapper,
+        uniqueStyle?.mainWrapper,
 
+      ]"
+  >
+    <!-- Outer Field Shell (handles border, bg, focus) -->
+    <div
+        @click="dropDown"
+        :class="[
+        multiSelectClass?.field,
+        customMultiSelectClass?.field,
+        uniqueStyle?.field,
+        {'textField__default__error': hasError}
+      ]"
+        tabindex="0"
+    >
+      <!-- Label+Tags+Icon Row (handles layout only) -->
       <div
-          v-if="selectedItems.length===0"
           :class="[
-              multiSelectClass?.labelAndIcon?.label,
-              customMultiSelectClass?.labelAndIcon?.label,
-              uniqueStyle?.labelAndIcon?.label
-              ]"
+          multiSelectClass?.labelAndIcon?.wrapper,
+          customMultiSelectClass?.labelAndIcon?.wrapper,
+          uniqueStyle?.labelAndIcon?.wrapper
+        ]"
       >
-        {{label}}
-      </div>
-      <div
-          v-else
-          :class="[
-              multiSelectClass?.labelAndIcon?.tag?.view?.view,
-              customMultiSelectClass?.labelAndIcon?.tag?.view?.view,
-              uniqueStyle?.labelAndIcon?.tag?.view?.view
-              ]"
-      >
+        <!-- Placeholder label if nothing is selected -->
         <div
-            id="multiselect"
+            v-if="selectedItems.length === 0"
             :class="[
+            multiSelectClass?.labelAndIcon?.label,
+            customMultiSelectClass?.labelAndIcon?.label,
+            uniqueStyle?.labelAndIcon?.label
+          ]"
+        >
+          {{ label }}
+        </div>
+        <!-- Selected tags if present -->
+        <div
+            v-else
+            :class="[
+            multiSelectClass?.labelAndIcon?.tag?.view?.view,
+            customMultiSelectClass?.labelAndIcon?.tag?.view?.view,
+            uniqueStyle?.labelAndIcon?.tag?.view?.view
+          ]"
+        >
+          <div
+              id="multiselect"
+              :class="[
               multiSelectClass?.labelAndIcon?.tag?.view?.wrapper,
               customMultiSelectClass?.labelAndIcon?.tag?.view?.wrapper,
               uniqueStyle?.labelAndIcon?.tag?.view?.wrapper
-              ]"
-        >
-
-          <div
-              :class="[
+            ]"
+          >
+            <div
+                v-for="(tag, index) in selectedItems"
+                :key="tag.id"
+                :class="[
                 multiSelectClass?.labelAndIcon?.tag?.view?.container,
                 customMultiSelectClass?.labelAndIcon?.tag?.view?.container,
                 uniqueStyle?.labelAndIcon?.tag?.view?.container
-                ]"
-              v-for="(tag,index) in selectedItems"
-              :key="index"
-          >
-            <div
-                :class="[
+              ]"
+            >
+              <span
+                  :class="[
                   multiSelectClass?.labelAndIcon?.tag?.view?.value,
                   customMultiSelectClass?.labelAndIcon?.tag?.view?.value,
                   uniqueStyle?.labelAndIcon?.tag?.view?.value
-                  ]"
-            >
-              {{tag.name}}
-            </div>
-            <div
-                @click="removeSelectedItem(tag)"
-                :class="[
+                ]"
+              >
+                {{ tag.name }}
+              </span>
+              <span
+                  @click.stop="removeSelectedItem(tag)"
+                  :class="[
                   multiSelectClass?.labelAndIcon?.tag?.view?.remove?.container,
                   customMultiSelectClass?.labelAndIcon?.tag?.view?.remove?.container,
                   uniqueStyle?.labelAndIcon?.tag?.view?.remove?.container
-                  ]"
-            >
-              <div
-                  :class="[
+                ]"
+              >
+                <span
+                    :class="[
                     multiSelectClass?.labelAndIcon?.tag?.view?.remove?.value,
                     customMultiSelectClass?.labelAndIcon?.tag?.view?.remove?.value,
                     uniqueStyle?.labelAndIcon?.tag?.view?.remove?.value
-                    ]"
-              >
-                X
-              </div>
+                  ]"
+                >X</span>
+              </span>
             </div>
           </div>
-
         </div>
-      </div>
-      <div>
-        <svg
-            v-show="isDisplay===false"
-            :class="[
-                multiSelectClass?.labelAndIcon?.icon?.icon,
-                customMultiSelectClass?.labelAndIcon?.icon?.icon,
-                uniqueStyle?.labelAndIcon?.icon?.icon
-                ]"
-            viewBox="0 0 20 20" fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-          <path
-              :class="[
-                  multiSelectClass?.labelAndIcon?.icon?.path,
-                  customMultiSelectClass?.labelAndIcon?.icon?.path,
-                  uniqueStyle?.labelAndIcon?.icon?.path
-                  ]"
-              d="M16.25 7.5L10 13.75L3.75 7.5"
-              stroke="#2E90FA"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-          />
-        </svg>
-        <svg
-            v-show="isDisplay===true"
-            :class="[
-                multiSelectClass?.labelAndIcon?.icon?.icon,
-                customMultiSelectClass?.labelAndIcon?.icon?.icon,
-                uniqueStyle?.labelAndIcon?.icon?.icon
-                ]"
-            viewBox="0 0 16 16" fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-              :class="[
-                  multiSelectClass?.labelAndIcon?.icon?.path,
-                  customMultiSelectClass?.labelAndIcon?.icon?.path,
-                  uniqueStyle?.labelAndIcon?.icon?.path
-                  ]"
-              d="M3 10L8 5L13 10"
-              stroke="#2E90FA"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-          />
-        </svg>
+        <!-- Dropdown Icon -->
+        <span @click="isDisplay=!isDisplay" class="textField__default__multiSelect__icon">
+          <svg  v-if="!isDisplay"
+               :class="[
+              multiSelectClass?.labelAndIcon?.icon?.icon,
+              customMultiSelectClass?.labelAndIcon?.icon?.icon,
+              uniqueStyle?.labelAndIcon?.icon?.icon
+            ]"
+               viewBox="0 0 20 20" fill="none"
+          >
+            <path
+                :class="[
+                multiSelectClass?.labelAndIcon?.icon?.path,
+                customMultiSelectClass?.labelAndIcon?.icon?.path,
+                uniqueStyle?.labelAndIcon?.icon?.path
+              ]"
+                d="M16.25 7.5L10 13.75L3.75 7.5"
+                stroke="#2E90FA"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+          </svg>
+          <svg v-else
+               :class="[
+              multiSelectClass?.labelAndIcon?.icon?.icon,
+              customMultiSelectClass?.labelAndIcon?.icon?.icon,
+              uniqueStyle?.labelAndIcon?.icon?.icon
+            ]"
+               viewBox="0 0 16 16" fill="none"
+          >
+            <path
+                :class="[
+                multiSelectClass?.labelAndIcon?.icon?.path,
+                customMultiSelectClass?.labelAndIcon?.icon?.path,
+                uniqueStyle?.labelAndIcon?.icon?.path
+              ]"
+                d="M3 10L8 5L13 10"
+                stroke="#2E90FA"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            />
+          </svg>
+        </span>
       </div>
     </div>
+
+    <!-- Dropdown Menu -->
     <transition name="slide" mode="out-in">
-      <div
-          v-if="isDisplay"
-          :class="[
-            multiSelectClass?.labelAndIcon?.dropdown?.wrapper,
-            customMultiSelectClass?.labelAndIcon?.dropdown?.wrapper,
-            uniqueStyle?.labelAndIcon?.dropdown?.wrapper
-            ]"
+      <div v-if="isDisplay"
+           class="multiselect__dropdown-list"
+           :class="[
+          multiSelectClass?.labelAndIcon?.dropdown?.wrapper,
+          customMultiSelectClass?.labelAndIcon?.dropdown?.wrapper,
+          uniqueStyle?.labelAndIcon?.dropdown?.wrapper
+        ]"
       >
         <input
             :class="[
-              multiSelectClass?.labelAndIcon?.dropdown?.input,
-              customMultiSelectClass?.labelAndIcon?.dropdown?.input,
-              uniqueStyle?.labelAndIcon?.dropdown?.input
-              ]"
+            multiSelectClass?.labelAndIcon?.dropdown?.input,
+            customMultiSelectClass?.labelAndIcon?.dropdown?.input,
+            uniqueStyle?.labelAndIcon?.dropdown?.input
+          ]"
             v-model="searchQuery"
             type="text"
             name="search"
             placeholder="search item here"
         >
         <div
+            v-for="item in filteredItems"
+            :key="item.id"
             @click="selectItem(item)"
             :class="[
-              multiSelectClass?.labelAndIcon?.dropdown?.container?.container,
-              customMultiSelectClass?.labelAndIcon?.dropdown?.container?.container,
-              uniqueStyle?.labelAndIcon?.dropdown?.container?.container
-              ]"
-            v-for="(item,index) in filteredItems"
-            :key="index"
+            multiSelectClass?.labelAndIcon?.dropdown?.container?.container,
+            customMultiSelectClass?.labelAndIcon?.dropdown?.container?.container,
+            uniqueStyle?.labelAndIcon?.dropdown?.container?.container
+          ]"
         >
-          <div
-              class="multiselect__outside__click__action"
-              v-if="isSelected[item.id]===true"
-          >
-            <svg
-                :class="[
+          <!-- Checkbox/indicator -->
+          <span v-if="isSelected[item.id] === true" class="multiselect__selected__check">
+           <svg
+               :class="[
                   multiSelectClass?.labelAndIcon?.dropdown?.container?.icon?.icon,
                   customMultiSelectClass?.labelAndIcon?.dropdown?.container?.icon?.icon,
                   uniqueStyle?.labelAndIcon?.dropdown?.container?.icon?.icon
                   ]"
-                viewBox="0 0 16 16"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg"
-            >
+               viewBox="0 0 16 16"
+               fill="none"
+               xmlns="http://www.w3.org/2000/svg"
+           >
               <path
                   :class="[
                     multiSelectClass?.labelAndIcon?.dropdown?.container?.icon?.path[0],
@@ -201,107 +208,119 @@
                   stroke-linejoin="round"
               />
             </svg>
-          </div>
-          <div
-              class="multiselect__outside__click__action"
-              v-else
+          </span>
+          <span v-else
+                :class="[
+              multiSelectClass?.labelAndIcon?.dropdown?.container?.box,
+              customMultiSelectClass?.labelAndIcon?.dropdown?.container?.box,
+              uniqueStyle?.labelAndIcon?.dropdown?.container?.box
+            ]"
+                class="multiselect__selected__check"
+          ></span>
+          <span
               :class="[
-                multiSelectClass?.labelAndIcon?.dropdown?.container?.box,
-                customMultiSelectClass?.labelAndIcon?.dropdown?.container?.box,
-                uniqueStyle?.labelAndIcon?.dropdown?.container?.box
-                ]"
-          >
-
-          </div>
-
-          <div
-              :class="[
-                multiSelectClass?.labelAndIcon?.dropdown?.container?.item,
-                customMultiSelectClass?.labelAndIcon?.dropdown?.container?.item,
-                uniqueStyle?.labelAndIcon?.dropdown?.container?.item
-                ]">
-            {{item.name}}
-          </div>
+              multiSelectClass?.labelAndIcon?.dropdown?.container?.item,
+              customMultiSelectClass?.labelAndIcon?.dropdown?.container?.item,
+              uniqueStyle?.labelAndIcon?.dropdown?.container?.item
+            ]"
+          >{{ item.name }}</span>
         </div>
       </div>
     </transition>
   </div>
 </template>
+
+
 <script setup>
+/**
+ * MultiSelect.vue
+ *
+ * A dynamic, schema-driven multi-select for reusable forms.
+ * - Full theming: supports global, schema, and field-level class objects
+ * - Allows searching, selecting, and removing multiple tags/options
+ * - Emits changes as an array of selected option objects
+ * - Handles outside click, dropdown animation, error state
+ *
+ * Props:
+ *   id:                       Field id (required)
+ *   modelValue:               Array of selected values (v-model, required)
+ *   items:                    Option array [{id, name}], required
+ *   label:                    Placeholder/label (string, required)
+ *   multiSelectClass:         Base class object for deep theming
+ *   customMultiSelectClass:   Schema-level class object
+ *   uniqueStyle:              Field-level class object
+ *   hasError:                 Show error class if true
+ *
+ * Emits:
+ *   update:modelValue: Array of selected option objects
+ *   blur:              Field id on change (for validation)
+ */
+
 import {computed, onMounted, ref, watch} from 'vue';
-import useDetectOutsideClick from "@/composable/useDetectOutsideClick.js";
+import useDetectOutsideClick from "@/composable/useDetectOutsideClick";
 import isEqual from "lodash/isEqual";
 
 const props=defineProps({
   id: { type: String, required: true },
-  modelValue:{
-    type:Array,
-    default:[],
-  },
-  items:{
-    type:Array,
-    required:true,
-    default:[],
-  },
-  label:{
-    type:String,
-    required:true,
-    default:null,
-  },
-
-  multiSelectClass:{
-    type:Object,
-    default:{},
-  },
-  customMultiSelectClass:{
-    type:Object,
-    default:{},
-  },
-  uniqueStyle:{
-    type:Object,
-    default:{},
-  },
-
-  hasError:{
-    type:Boolean,
-    default:false,
-  },
+  modelValue: { type:Array, default:() => [] },
+  items: { type:Array, required:true, default:() => [] },
+  label: { type:String, required:true, default:null },
+  multiSelectClass: { type:Object, default:() => ({}) },
+  customMultiSelectClass: { type:Object, default:() => ({}) },
+  uniqueStyle: { type:Object, default:() => ({}) },
+  hasError: { type:Boolean, default:false },
 });
-const  emit  = defineEmits(['blur',"update:modelValue"]);
+const emit = defineEmits(['blur',"update:modelValue"]);
 
 const isDisplay = ref(false);
-
 const selectedItems = ref([]);
-const isShow = ref(false);
 const multiselectRef=ref();
 const isSelected=ref({});
-
 const searchQuery = ref("");
+
+/** Remove duplicates by item.id */
+function dedupe(arr) {
+  const seen = {};
+  return arr.filter(item => {
+    if (!item || seen[item.id]) return false;
+    seen[item.id] = true;
+    return true;
+  });
+}
+
+/** Keeps isSelected state in sync with selectedItems. */
+function syncIsSelected() {
+  const sel = selectedItems.value.map(item => item.id);
+  // Set true for selected
+  sel.forEach(id => { isSelected.value[id] = true; });
+  // Set false for not selected
+  props.items.forEach(item => {
+    if (!sel.includes(item.id)) isSelected.value[item.id] = false;
+  });
+}
 
 onMounted(() => {
   initializeState();
 });
 
 const initializeState = () => {
-  // Reset selection state
   props.items.forEach((item) => {
     isSelected.value[item.id] = false;
   });
 
-  // Check if modelValue is an array
   if (Array.isArray(props.modelValue)) {
     props.modelValue.forEach((value) => {
       const matchingItem = findMatchingItem(value);
-      if (matchingItem) {
+      if (matchingItem && !selectedItems.value.some(t => t.id === matchingItem.id)) {
         selectedItems.value.push(matchingItem);
-        isSelected.value[matchingItem.id] = true;
       }
     });
   }
+  selectedItems.value = dedupe(selectedItems.value);
+  syncIsSelected();
   emit("update:modelValue", selectedItems.value);
 };
 
-// Helper function to find matching item based on value type
 const findMatchingItem = (value) => {
   if (typeof value === "number" || typeof value === "string") {
     return props.items.find((item) => item.id === value);
@@ -314,36 +333,32 @@ const findMatchingItem = (value) => {
 watch(
     () => props.modelValue,
     (newValue) => {
-      const isSame = Array.isArray(newValue) &&
-          newValue.length === selectedItems.value.length &&
-          newValue.every((item, index) => isEqual(item, selectedItems.value[index]));
+      const unique = dedupe(Array.isArray(newValue) ? newValue : []);
+      const isSame = unique.length === selectedItems.value.length &&
+          unique.every((item, index) => isEqual(item, selectedItems.value[index]));
 
-      if (isSame) {
-        return; // No changes, skip updating the state
-      }
-      // Reset selected items
+      if (isSame) return;
+
       selectedItems.value = [];
       Object.keys(isSelected.value).forEach((key) => {
         isSelected.value[key] = false;
       });
 
-      // If the newValue is an array, update the state
       if (Array.isArray(newValue)) {
         newValue.forEach((value) => {
           const matchingItem = findMatchingItem(value);
-          if (matchingItem) {
+          if (matchingItem && !selectedItems.value.some(t => t.id === matchingItem.id)) {
             selectedItems.value.push(matchingItem);
-            isSelected.value[matchingItem.id] = true;
           }
         });
       }
+      selectedItems.value = dedupe(selectedItems.value);
+      syncIsSelected();
       emit("update:modelValue", selectedItems.value);
 
     },
-    { immediate: true } // Ensure the watcher runs on initialization
+    { immediate: true }
 );
-
-
 
 const filteredItems = computed(() => {
   if (!searchQuery.value) return props.items;
@@ -352,75 +367,61 @@ const filteredItems = computed(() => {
   );
 });
 
-
-
-
-useDetectOutsideClick([multiselectRef],['multiselect__outside__click__action'],()=>{
-  //console.log('tum be tum');
+// Handles outside click to close the dropdown
+useDetectOutsideClick([multiselectRef],['multiselect__outside__click__action','multiselect__selected__check','textField__default__multiSelect__icon'],()=>{
   isDisplay.value = false;
 })
+
 const dropDown = () => {
   isDisplay.value = !isDisplay.value;
 };
 
-
-
+/** Add or remove selection. Keeps everything in sync. */
 function selectItem (item)  {
-
-  isSelected.value[item.id] = !isSelected.value[item.id];
-
-  if (isSelected.value[item.id]) {
+  if (!selectedItems.value.some(tag => tag.id === item.id)) {
     selectedItems.value.push(item);
   } else {
     selectedItems.value = selectedItems.value.filter((tag) => tag.id !== item.id);
   }
-
-  if (selectedItems.value.length === 0) {
-    isShow.value = false;
-  } else {
-    isShow.value = !isShow.value;
-  }
-
+  selectedItems.value = dedupe(selectedItems.value);
+  syncIsSelected();
   emit('blur',props.id);
   emit("update:modelValue", selectedItems.value);
-  console.log('checking selected items',selectedItems.value);
-
 }
 
+/** Remove from selected. */
 function removeSelectedItem(item){
   isDisplay.value = false;
-  isSelected.value[item.id] = !isSelected.value[item.id];
   selectedItems.value = selectedItems.value.filter((tag) => tag.id !== item.id);
+  selectedItems.value = dedupe(selectedItems.value);
+  syncIsSelected();
   emit('blur',props.id);
   emit("update:modelValue", selectedItems.value);
 }
 </script>
-<style scoped lang="scss">
-@import '@/assets/textField/textFieldCustomization.scss';
 
-
-</style>
 
 
 
 <style scoped>
-#multiselect {
-  /* Your existing styles */
-  /* ... */
-  scrollbar-width: thin; /* Set the width of the scrollbar */
-  scrollbar-color: #2F80ED #E2E8F0; /* Set the color of the scrollbar */
+.multiselect__dropdown-list {
+  max-height: 12em;         /* Controls the dropdown max size */
+  overflow-y: auto;         /* Enables scroll when overflowing */
+  /* Optional: */
+  scrollbar-width: thin;
+  scrollbar-color: #2F80ED #E2E8F0;
 }
 
-#multiselect::-webkit-scrollbar {
-  width: 3px; /* Set the width of the scrollbar */
+.multiselect__dropdown-list::-webkit-scrollbar {
+  width: 3px;
 }
 
-#multiselect::-webkit-scrollbar-thumb {
-  background-color: #2F80ED; /* Set the color of the scrollbar thumb */
+.multiselect__dropdown-list::-webkit-scrollbar-thumb {
+  background-color: #2F80ED;
 }
 
-#multiselect::-webkit-scrollbar-track {
-  background-color: #E2E8F0; /* Set the color of the scrollbar track */
+.multiselect__dropdown-list::-webkit-scrollbar-track {
+  background-color: #E2E8F0;
 }
 
 
@@ -460,6 +461,3 @@ function removeSelectedItem(item){
 }
 </style>
 
-<style lang="scss">
-
-</style>

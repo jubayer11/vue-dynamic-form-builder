@@ -1,245 +1,237 @@
 <template>
+  <div class="dfdemo__container">
 
-    <div  class="flexBoxCenter flex-col bg-white p-3 card text-black">
-      <div class="w-[24em] sm:w-[70vw] max-w-[40em] card py-[2em] px-[1em] lg:px-[3em] rounded-md">
-        <DynamicForm
-            :schema="formSchema"
-            v-model="formData"
-            @submit="handleSubmit"
-            ref="customForm"
-        />
-        <div>
-          <pre>{{ formData }}</pre>
-        </div>
+    <header class="dfdemo__header">
+      <h1>Vue Dynamic Form System</h1>
+      <p class="dfdemo__subtitle">
+        Build dynamic, schema-driven forms with customizable layout, validation, and styling — with full developer control.<br>
+        <small>Designed and developed by <a href="https://jubayerahmed.com/" target="_blank" class="dfdemo__author">Jubayer Ahmed</a></small>
+      </p>
+    </header>
 
+    <main class="dfdemo__main">
 
+      <nav class="dfdemo__toc">
+        <ul>
+          <li><a href="#section-1">1. Basic Prefilled Form</a></li>
+          <li><a href="#section-2">2. Row/Column Form Layout</a></li>
+          <li><a href="#section-3">3. Manual Submit & Actions</a></li>
+          <li><a href="#section-4">4. Custom Field Styling</a></li>
+          <li><a href="#section-5">5. Popup Form (Modal Dialog)</a></li>
+          <li><a href="#section-6">6. Date and Time Picker Types</a></li>
+        </ul>
+      </nav>
+
+      <!-- Sections -->
+      <section id="section-1" class="dfdemo__section">
+        <h2 class="dfdemo__section-title">1. Basic Prefilled Form (with Validation)</h2>
+        <p class="dfdemo__section-desc">
+          Shows required fields, different field types, and prefilled data. Try submitting to see validation and backend error handling.
+        </p>
+        <DemoPrefilledForm />
+      </section>
+
+      <section id="section-2" class="dfdemo__section">
+        <h2 class="dfdemo__section-title">2. Row/Column Form Layout</h2>
+        <p class="dfdemo__section-desc">
+          Fields arranged in a responsive two-column layout using utility classes.
+        </p>
+        <DemoRowForm />
+      </section>
+
+      <section id="section-3" class="dfdemo__section">
+        <h2 class="dfdemo__section-title">3. Manual Submit & Custom Actions</h2>
+        <p class="dfdemo__section-desc">
+          The submit button and submission logic are handled outside the form component.
+        </p>
+        <DemoManualSubmitForm />
+      </section>
+
+      <section id="section-4" class="dfdemo__section">
+        <h2 class="dfdemo__section-title">4. Custom Field Styling</h2>
+        <p class="dfdemo__section-desc">
+          Demonstrates custom background, label colors, field alignments, and dropdown style overrides.
+        </p>
+        <DemoCustomStyleForm />
+      </section>
+
+      <section id="section-5" class="dfdemo__section">
+        <h2 class="dfdemo__section-title">5. Popup Form (Modal Dialog)</h2>
+        <p class="dfdemo__section-desc">
+          Opens a fully functional form inside a responsive modal popup. Try submitting or cancelling.
+        </p>
+        <DemoPopupForm />
+      </section>
+
+      <section id="section-6" class="dfdemo__section">
+        <h2 class="dfdemo__section-title">6. Date and Time Picker Types</h2>
+        <p class="dfdemo__section-desc">
+          Explore every picker mode: <b>Date, Date+Time, Month, Time, Year, Week</b>.<br>
+          Useful for real-world testing and UI flexibility.
+        </p>
+        <DemoDateForm />
+      </section>
+
+    </main>
+
+    <footer class="dfdemo__footer">
+      <div class="dfdemo__branding">
+        <a class="dfdemo__author" href="https://jubayerahmed.com/" target="_blank"> <strong>Jubayer Ahmed</strong> </a> <span>•</span> <small>Dynamic Systems, Clean Code</small><br>
+        <small>© 2025 All Rights Reserved</small>
       </div>
-    </div>
+    </footer>
 
+  </div>
 </template>
 
 <script setup>
-import { computed, reactive, ref } from "vue";
-import {FieldType} from "@/utils/dynamicForm/FieldTypeClass.js";
-import {fieldType} from "@/utils/dynamicForm/customizableTextField.js";
-import {ValidationSetup} from "@/utils/dynamicForm/ValidationSetupClass.js";
-import {CustomizableFieldsStyle} from "@/utils/dynamicForm/CustomizableFieldStyleClass.js";
-import { CustomizableTextField } from "@/utils/dynamicForm/CustomizableTextFieldClass.js";
-import DynamicForm from "@/components/DynamicForm/index.vue"
-
-
-
-const items = ref([
-  { id: 1, name: 'cricket' },
-  { id: 2, name: 'football' },
-  { id: 3, name: 'hockey' },
-  { id: 1, name: 'cricket' },
-  { id: 2, name: 'football' },
-  { id: 3, name: 'hockey' },
-]);
-const tagItems = [
-  { id: 2, name: 'abc play ground' },
-  { id: 3, name: 'efg play ground' },
-  { id: 4, name: 'hij play ground' },
-  { id: 5, name: 'klm play ground' },
-];
-
-const groupList = [
-  { id: 7, name: 'Group A' },
-  { id: 8, name: 'Group B' },
-  { id: 9, name: 'Group C' },
-];
-
-const predefinedData = {
-  title: "",
-  password: "123456",
-  password_confirmation: "123456",
-  fees: 300.0,
-  activity: 3,
-  location: 2,
-  groups: [7, 8],
-  details: "Predefined Details",
-  radio: 8,
-  start: '11/12/2024 18:00',
-  end: '12/2024',
-};
-
-const title = new FieldType({
-  fieldType: fieldType.textField,
-  label: 'Title',
-  placeholder: 'Write title',
-  type: 'text',
-  forType: 'title',
-  mandatory: true,
-  defaultValue: predefinedData.title,
-});
-
-const password = new FieldType({
-  fieldType: fieldType.passwordTextField,
-  label: 'Password',
-  placeholder: 'write password',
-  type: 'password',
-  forType: 'password',
-  mandatory: true,
-  defaultValue: predefinedData.password
-});
-
-const passwordConfirmation = new FieldType({
-  fieldType: fieldType.textField,
-  label: 'Password confirmation',
-  placeholder: 'write password confirmation',
-  type: 'password',
-  forType: 'password_confirmation',
-  mandatory: true,
-  defaultValue: predefinedData.password_confirmation
-});
-
-const fees = new FieldType({
-  fieldType: fieldType.textField,
-  label: 'Fees',
-  placeholder: 'group fees per month',
-  type: 'number',
-  forType: 'fees',
-  mandatory: true,
-  defaultValue: predefinedData.fees,
-});
-
-const activity = new FieldType({
-  fieldType: fieldType.selectField,
-  label: 'Activity',
-  placeholder: 'select activity',
-  forType: 'activity',
-  mandatory: true,
-  tagItems: items.value,
-  defaultValue: predefinedData.activity
-});
-
-const location = new FieldType({
-  fieldType: fieldType.selectField,
-  label: 'Location',
-  placeholder: 'select location',
-  forType: 'location',
-  mandatory: true,
-  tagItems: tagItems,
-  defaultValue: predefinedData.location
-});
-
-const details = new FieldType({
-  fieldType: fieldType.textArea,
-  label: 'Details',
-  placeholder: 'write details',
-  type: 'text',
-  forType: 'details',
-  defaultValue: predefinedData.details,
-});
-
-const startDateAndTime = new FieldType({
-  fieldType: fieldType.datePickerField,
-  label: 'Start Date & Time',
-  placeholder: 'start date & time',
-  type: 'dateTime',
-  forType: 'start',
-  mandatory: true,
-  defaultValue: '14/12/2024 22:10'
-
-});
-
-const endDateAndTime = new FieldType({
-  fieldType: fieldType.datePickerField,
-  label: 'End Date & Time',
-  placeholder: 'end date & time',
-  type: 'month',
-  forType: 'end',
-  mandatory: true,
-  defaultValue:'08/2025'
-
-});
-
-const selectGroup = new FieldType({
-  fieldType: fieldType.multiSelect,
-  label: 'Select Group',
-  placeholder: 'choose group',
-  forType: 'groups',
-  mandatory: true,
-  tagItems: groupList,
-  defaultValue: predefinedData.groups
-});
-
-const radioField = new FieldType({
-  fieldType: fieldType.radioField,
-  label: 'Checking Radio Button',
-  forType: 'radio',
-  mandatory: true,
-  tagItems: groupList,
-  defaultValue: predefinedData.radio
-});
-
-// Field Customizations and Validations
-title.setInsetIconType('iconSearch');
-title.updateStyle('fieldAndError.field','player__userQuery__searchField');
-title.addValidations(ValidationSetup.required('Please provide a title for your submission.'));
-fees.addValidations(ValidationSetup.required('Fees is required'));
-title.addValidations(ValidationSetup.minLength(5, 'Title must have at least 5 characters.'));
-title.addValidations(ValidationSetup.maxLength(10, 'Title have more than 10 characters.'));
-title.addValidations(
-    ValidationSetup.custom(
-        (value,formData) => {
-          if (value === formData.password){
-            return true;
-          }
-        },
-        'The title must be "Admin".'
-    )
-);
-passwordConfirmation.addValidations(ValidationSetup.sameAs('password'));
-password.updateStyle('password.show','checking checking and checking');
-
-const customStyle = new CustomizableFieldsStyle();
-const data = reactive(new CustomizableTextField());
-const formData = ref(data.getFormData());
-const customForm = ref(null);
-
-// Add fields to form
-data.addField(title);
-data.addField(fees);
-data.addField(activity);
-data.addField(startDateAndTime);
-data.addField(endDateAndTime);
-data.addField(location);
-data.addField(selectGroup);
-data.addField(details);
-data.addField(password);
-data.addField(passwordConfirmation);
-data.addField(radioField);
-
-data.updateSubmitButton(true,'check');
-customStyle.update('fieldAndError.field','textField__custom__fieldBackground');
-customStyle.update('field.mainDiv','training__create__mainDiv');
-customStyle.update('field.wrapper','training__create__wrapper');
-customStyle.update('fieldAndError.multiSelect.field','training__create__multiSelect__field');
-customStyle.update('fieldAndError.multiSelect.labelAndIcon.tag.view.view','training__create__multiSelect__field__view');
-data.updateStyle(customStyle);
-
-const formSchema = computed(() => data);
-
-function LoadMore() {
-  //formData.value.title='someTitle';
-  formData.value.activity={id:2,name:'football'};
-  formData.value.groups=[8,9];
-  formData.value.end='11/12/2024 01:20';
-  formData.value.details='hello mokles';
-  if (customForm.value && typeof customForm.value.handleSubmit === 'function') {
-    customForm.value.handleSubmit();
-  } else {
-    console.error('handleSubmit is not a function on CustomForm');
-  }
-}
-
-const handleSubmit = async () => {
-console.log('form submitted',formData.value);
-};
+import DemoPrefilledForm from "@/components/demo/DemoPrefilledForm.vue";
+import DemoRowForm from "@/components/demo/DemoRowForm.vue";
+import DemoManualSubmitForm from "@/components/demo/DemoManualSubmitForm.vue";
+import DemoCustomStyleForm from "@/components/demo/DemoCustomStyleForm.vue";
+import DemoPopupForm from "@/components/demo/DemoPopupForm.vue";
+import DemoDateForm from "@/components/demo/DemoDateForm.vue";
 </script>
 
+<style>
+html {
+  scroll-behavior: smooth;
+}
+</style>
+
 <style scoped>
-/* Add your specific styles below */
+/* ====== Layout Styles ====== */
+.dfdemo__container {
+  max-width: 850px;
+  margin: 0 auto;
+  padding: 2.5em 1em;
+  background: #f7fafc;
+  border-radius: 18px;
+  box-shadow: 0 6px 30px rgba(30,40,110,0.07);
+  min-height: 100vh;
+}
+
+/* ====== Header ====== */
+.dfdemo__header {
+  text-align: center;
+  margin-bottom: 2.5em;
+}
+.dfdemo__header h1 {
+  font-size: 2.4em;
+  font-weight: bold;
+  color: #2563eb;
+  margin-bottom: 0.5em;
+  letter-spacing: -0.01em;
+}
+.dfdemo__subtitle {
+  font-size: 1.2em;
+  color: #4b5563;
+}
+.dfdemo__subtitle small {
+  display: block;
+  font-size: 0.95em;
+  margin-top: 0.5em;
+  color: #64748b;
+}
+.dfdemo__author {
+  color: #2563eb;
+  text-decoration: none;
+}
+.dfdemo__author:hover {
+  text-decoration: underline;
+}
+
+/* ====== Table of Contents ====== */
+.dfdemo__toc {
+  background: #f0f4f8;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  padding: 1.2em;
+  margin-bottom: 2.5em;
+  box-shadow: 0 2px 8px rgba(30,30,60,0.06);
+}
+.dfdemo__toc ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+.dfdemo__toc li {
+  margin-bottom: 0.7em;
+}
+.dfdemo__toc a {
+  color: #2563eb;
+  text-decoration: none;
+  font-size: 1.1em;
+  font-weight: 500;
+  transition: color 0.2s, text-decoration 0.2s;
+}
+.dfdemo__toc a:hover {
+  color: #1d4ed8;
+  text-decoration: underline;
+}
+
+/* ====== Sections ====== */
+.dfdemo__main {
+  display: flex;
+  flex-direction: column;
+  gap: 3em;
+}
+.dfdemo__section {
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 1px 8px rgba(30,30,60,0.09);
+  padding: 1.8em 1.2em 2.2em 1.2em;
+}
+.dfdemo__section-title {
+  font-size: 1.5em;
+  color: #334155;
+  margin-bottom: 0.3em;
+  font-weight: 600;
+}
+.dfdemo__section-desc {
+  color: #6b7280;
+  font-size: 1.05em;
+  margin-bottom: 1.2em;
+}
+
+/* ====== Footer Branding ====== */
+.dfdemo__footer {
+  margin-top: 4em;
+  padding-top: 2em;
+  border-top: 1px solid #e5e7eb;
+  text-align: center;
+}
+.dfdemo__branding {
+  color: #64748b;
+  font-size: 0.95em;
+  animation: fadeIn 1s ease-out;
+}
+.dfdemo__branding strong {
+  color: #2563eb;
+  font-weight: 600;
+}
+.dfdemo__branding span {
+  margin: 0 0.4em;
+  color: #9ca3af;
+}
+.dfdemo__branding small {
+  display: block;
+  margin-top: 0.3em;
+  font-size: 0.85em;
+}
+
+/* ====== Animations ====== */
+@keyframes fadeIn {
+  0% { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ====== Responsive ====== */
+@media (max-width: 640px) {
+  .dfdemo__container { padding: 1em 0.6em; }
+  .dfdemo__section { padding: 1em 0.4em 1.4em 0.4em; }
+  .dfdemo__header h1 { font-size: 1.7em; }
+  .dfdemo__section-title { font-size: 1.2em; }
+  .dfdemo__subtitle { font-size: 1em; }
+}
 </style>

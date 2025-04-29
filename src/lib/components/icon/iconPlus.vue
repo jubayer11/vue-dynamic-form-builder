@@ -15,9 +15,3 @@ const props=defineProps({
   }
 });
 </script>
-<style scoped lang="scss">
-@import '@/assets/icon/iconDefault.scss';
-
-
-
-</style>

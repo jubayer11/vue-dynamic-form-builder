@@ -1,3 +1,27 @@
+
+/**
+ * textFieldStyle
+ *
+ * Default CSS class mapping for all dynamic form fields and their sub-elements.
+ * Used as the base style object throughout your form builder package.
+ *
+ * - Structure mirrors all field/component types: field, radio, select, multiSelect, error, etc.
+ * - Every key points to a CSS class or nested group of classes for granular control.
+ * - Always use as a read-only base: allow schema-level or field-level overrides via deep merge in components.
+ *
+ * Example usage in a Vue component:
+ *   :class="[
+ *     style?.fieldAndError?.field,
+ *     schema?.style?.fieldAndError?.field,
+ *     item?.customStyle?.fieldAndError?.field
+ *   ]"
+ *
+ * DO NOT mutate this object in runtime. For custom themes or overrides,
+ *   - Extend/merge with schema.style or field.customStyle.
+ *   - (Optional) Export additional style objects for other design systems.
+ *
+ * @type {Object}
+ */
 const textFieldStyle={
     mainDiv:'textField__default__mainDiv',
     field:{
@@ -16,6 +40,10 @@ const textFieldStyle={
 
     fieldAndError:{
         wrapper:'textField__default__field__container__fieldAndError__wrapper',
+        fieldAndIcon:{
+            wrapper:'textField__default__field__container__fieldAndError__fieldAndIcon__wrapper',
+            fieldWithIcon: 'textField__default__field__container__fieldAndError__fieldAndIcon__fieldWithIcon',
+        },
         field:'textField__default__field__container__fieldAndError__field',
         fieldError:'textField__default__field__container__fieldAndError__field__error',
         radioField:{
@@ -45,6 +73,7 @@ const textFieldStyle={
 
         },
         multiSelect: {
+            mainWrapper:'textField__default__field__container__fieldAndError__multiSelect__mainWrapper',
             field:'textField__default__field__container__fieldAndError__multiSelect__field',
             labelAndIcon:{
                 wrapper:'textField__default__field__container__fieldAndError__select__labelAndIcon__wrapper',

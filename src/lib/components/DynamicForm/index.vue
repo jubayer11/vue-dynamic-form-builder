@@ -1,4 +1,27 @@
+<!--
+  DynamicForm.vue
+
+  This component renders a highly customizable dynamic form.
+  - Supports field-level, schema-level, and global (base) style overrides via layered class binding.
+  - Uses localModel (reactive) for two-way binding and validation, then emits changes up via update:modelValue.
+  - Accepts a schema describing all fields, styles, and validation config.
+
+  CSS Class Merge Pattern:
+    Each section (field, label, etc) merges classes from:
+      1. Base style (from import style)
+      2. Schema-level overrides (schema.style)
+      3. Field-level overrides (item.customStyle)
+    This provides max flexibility for design/theming.
+    See README for usage pattern details.
+
+  See also:
+    - FieldLabel, FieldErrorMessages, and input components for field rendering
+    - Validation logic: uses vuelidate + dynamic rule generation
+
+  -- See specific inline comments for further details.
+-->
 <template>
+  <!-- Root div for the form layout -->
   <div :class="[
       style?.mainDiv,
       schema?.style?.mainDiv]">
@@ -7,6 +30,7 @@
       style?.field?.mainDiv,
       schema?.style?.field?.mainDiv]">
 
+      <!-- Iterate over form fields defined in schema -->
       <div :class="[
         style?.field?.wrapper,
         schema?.style?.field?.wrapper,
@@ -19,7 +43,12 @@
           schema?.style?.field?.container,
           item?.customStyle?.container]">
 
-
+          <!--
+            Label rendering, supporting class overrides:
+              - baseLabelClass: global style
+              - customLabelClass: schema (form-wide) override
+              - uniqueLabelClass: field-specific override
+           -->
           <FieldLabel
               :label="item.label"
               :forId="item.forType"
@@ -32,34 +61,52 @@
               :uniqueMandatoryClass="item?.customStyle?.label?.mandatory"
           />
 
-
+          <!-- Field and error wrapper -->
           <div
               :class="[
                 style?.fieldAndError?.wrapper,
                 schema?.style?.fieldAndError?.wrapper,
                 item?.customStyle?.fieldAndError?.wrapper]">
 
+            <!-- Field rendering based on type -->
+            <!-- All v-models bind to localModel to keep validation reactive -->
+            <div
+                :class="[
+                    style?.fieldAndError?.fieldAndIcon.wrapper,
+                    schema?.style?.fieldAndError?.fieldAndIcon.wrapper,
+                    item?.customStyle?.fieldAndError?.fieldAndIcon.wrapper
+                ]"
+            >
+
+
             <TextField
                 v-if="isTextField(item)"
                 :id="item.forType"
-                v-model="localModel[item.forType]"
+                :modelValue="localModel[item.forType]"
                 :placeholder="item.placeholder"
                 :type="item.type"
                 :hasError="v$[item.forType].$error"
                 :baseFieldClass="style?.fieldAndError?.field"
                 :customFieldClass="schema?.style?.fieldAndError?.field"
                 :uniqueFieldClass="item?.customStyle?.fieldAndError?.field"
+                :baseIconPaddingClass="item.insetIconType ? style?.fieldAndError?.fieldAndIcon?.fieldWithIcon : ''"
+                :customIconPaddingClass="item.insetIconType ? schema?.style?.fieldAndError?.fieldAndIcon?.fieldWithIcon : ''"
+                :uniqueIconPaddingClass="item.insetIconType ? item?.customStyle?.fieldAndError?.fieldAndIcon?.fieldWithIcon : ''"
                 @blur="handleBlur"
+                @update:modelValue="value => updateFieldValue(item.forType, value)"
             />
             <PasswordField
                 v-else-if="item.fieldType===fieldType.passwordTextField"
                 :id="item.forType"
-                v-model="localModel[item.forType]"
+                :modelValue="localModel[item.forType]"
                 :placeholder="item.placeholder"
                 :hasError="v$[item.forType].$error"
                 :baseFieldClass="style?.fieldAndError?.field"
                 :customFieldClass="schema?.style?.fieldAndError?.field"
                 :uniqueFieldClass="item?.customStyle?.fieldAndError?.field"
+                :baseIconPaddingClass="item.insetIconType ? style?.fieldAndError?.fieldAndIcon?.fieldWithIcon : ''"
+                :customIconPaddingClass="item.insetIconType ? schema?.style?.fieldAndError?.fieldAndIcon?.fieldWithIcon : ''"
+                :uniqueIconPaddingClass="item.insetIconType ? item?.customStyle?.fieldAndError?.fieldAndIcon?.fieldWithIcon : ''"
                 :containerClass="[
                   style?.field?.password?.container,
                   schema?.style?.field?.password?.container,
@@ -71,11 +118,13 @@
                     item?.customStyle?.password?.show
                     ]"
                 @blur="handleBlur"
+                @update:modelValue="value => updateFieldValue(item.forType, value)"
+
             />
             <DatePickerField
                 v-else-if="item.fieldType === fieldType.datePickerField"
                 :id="item.forType"
-                v-model="localModel[item.forType]"
+                :modelValue="localModel[item.forType]"
                 :placeholder="item.placeholder"
                 :pickerType="item.type"
                 :hasError="v$[item.forType].$error"
@@ -83,18 +132,21 @@
                 :customFieldClass="schema?.style?.fieldAndError?.field"
                 :uniqueFieldClass="item?.customStyle?.fieldAndError?.field"
                 @blur="handleBlur"
+                @update:modelValue="value => updateFieldValue(item.forType, value)"
 
             />
             <TextAreaField
                 v-else-if="item.fieldType === fieldType.textArea"
                 :id="item.forType"
-                v-model="localModel[item.forType]"
+                :modelValue="localModel[item.forType]"
                 :placeholder="item.placeholder"
                 :hasError="v$[item.forType].$error"
                 :baseFieldClass="style?.fieldAndError?.field"
                 :customFieldClass="schema?.style?.fieldAndError?.field"
                 :uniqueFieldClass="item?.customStyle?.fieldAndError?.field"
                 @blur="handleBlur"
+                @update:modelValue="value => updateFieldValue(item.forType, value)"
+
             />
             <SelectField
                 v-else-if="item.fieldType===fieldType.selectField && item.tagItems.length > 0"
@@ -150,9 +202,8 @@
                 :modelValue="localModel[item.forType]"
                 @update:modelValue="(value) => updateFieldValue(item.forType,value)"
                 @blur="handleBlur"
-
-            >
-            </MultiSelect>
+            />
+            <!-- Dynamic icon support for fields with insetIconType -->
             <component
                 v-if="item?.insetIconType!==null"
                 :class="[
@@ -165,8 +216,10 @@
                 :is="dynamicIconComponent[index]"
             >
             </component>
+            <!-- Show Vuelidate or backend errors -->
+            </div>
             <FieldErrorMessages
-                v-if="v$[item.forType].$error || schema?.errorField?.[item.forType]"
+
                 :backendError="schema?.errorField?.[item.forType]"
                 :wrapperStyle="[
                   style?.fieldAndError?.error?.wrapper,
@@ -179,13 +232,12 @@
                 ]"
                 :errors="v$[item.forType].$errors"
             />
-
           </div>
+
         </div>
-
       </div>
-
     </div>
+    <!-- Submit Button (conditionally shown) -->
     <SubmitButton
         v-show="schema?.submitButton?.isSubmitButton"
         :content="schema?.submitButton?.content"
@@ -201,10 +253,18 @@
         @click="handleSubmit"
     />
   </div>
-
 </template>
-<script setup>
 
+<script setup>
+/**
+ * --- DynamicForm Component Logic ---
+ *
+ * - Uses a local reactive model (`localModel`) for field binding and validation.
+ * - Watches parent-provided `modelValue` to keep local state in sync.
+ * - Emits updates on any field change via update:modelValue.
+ * - Handles dynamic validation rule generation via vuelidate.
+ * - Merges base, schema, and field-specific classes for styling flexibility.
+ */
 
 import {computed, nextTick, onBeforeMount, reactive, shallowRef, watch} from "vue";
 import {useVuelidate} from "@vuelidate/core";
@@ -212,8 +272,7 @@ import '@vuepic/vue-datepicker/dist/main.css';
 import style from "@/utils/dynamicForm/styleState.js"
 import {importDynamicIconComponentForTextField} from "@/composable/dynamicIconImport/index.js";
 
-
-//importing component
+// Import field components
 import FieldLabel from "@/components/DynamicForm/FieldLabel.vue";
 import TextField from "@/components/DynamicForm/TextField.vue";
 import PasswordField from "@/components/DynamicForm/PasswordField.vue";
@@ -225,10 +284,9 @@ import MultiSelect from "@/components/DynamicForm/MultiSelect.vue";
 import SubmitButton from "@/components/DynamicForm/SubmitButton.vue";
 import {generateValidationRules} from "@/composable/validation/validationRules.js";
 import FieldErrorMessages from "@/components/DynamicForm/FieldErrorMessages.vue";
-
 import {fieldType} from "@/utils/dynamicForm/customizableTextField.js";
 
-//props and emits
+// --- Props ---
 const props=defineProps({
   /**
    * Form schema object describing fields and configuration.
@@ -245,13 +303,18 @@ const props=defineProps({
    * @required
    */
   modelValue: { type: Object, required: true },
-  onSubmit: { type: Function, required: false },
+
 });
+
+// --- Local State ---
+// Use a local reactive model for better control and validation.
 const localModel = reactive({ ...props.modelValue });
 
 defineExpose({
   handleSubmit,
 });
+
+// Sync localModel with parent prop
 watch(
     () => props.modelValue,
     (newVal) => {
@@ -260,18 +323,18 @@ watch(
     { deep: true }
 );
 
+// --- Emits ---
+const emit = defineEmits(['update:modelValue', 'submit']);
 
-const emit = defineEmits(["update:modelValue"]);
 
-//ref and reactive state
+// --- Dynamic Icon Loading ---
 const dynamicIconComponent= shallowRef({});
 
-//life cycle hook
+// On mount, load any dynamic icon components needed for fields.
 onBeforeMount(()=>{
   setupDynamicIcons();
 })
 
-//methods and asynchronous method
 function setupDynamicIcons() {
   for (let i=0;i<props.schema?.fields.length;i++){
     if (props.schema?.fields[i].insetIconType!==null){
@@ -280,70 +343,49 @@ function setupDynamicIcons() {
   }
 }
 
-// const updateFieldValue = (key, value) => {
-//   //console.log('checking value',key,value);
-//        //props.modelValue[key]=value;
-//   //emit("update:modelValue", { ...props.modelValue, [key]: value });
-//   //console.log('checking props',props.modelValue);
-//
-//
-//
-//   const updatedModel = { ...props.modelValue, [key]: value };
-//   emit("update:modelValue", updatedModel);
-// };
+// --- Field Value Updates ---
+// All updates flow via localModel + emit for one-way data flow
 const updateFieldValue = (key, value) => {
   localModel[key] = value;
-  emit("update:modelValue", { ...localModel });
+  emit("update:modelValue", { ...localModel });  //  passing the reactive object!
 };
+
+// --- Validation (Blur Handler) ---
 const handleBlur = async (field) => {
   await nextTick();
   v$.value[field]?.$touch();
   await v$.value.$validate();
-
-  //console.log('Checking field:', field);
-  //console.log('Errors for field:', v$.value[field].$error);
-  //console.log('FormData:', props.modelValue);
 };
 
+// --- Form Submit Handler ---
+// REMOVE onSubmit from props
 
+// In your component, emit the submit event instead of calling a prop
 async function handleSubmit(){
+  console.log('check after',localModel);
+
   const isValid = await v$.value.$validate();
   if (isValid){
-    props.onSubmit();
-  }
-  else {
+    emit("submit", { ...localModel }); // Pass data if you want!
+  } else {
     v$.value.$touch();
   }
+
+  console.log('check after',localModel);
 }
 
+
+// --- Helper: Detect if standard text input field
 function isTextField(item) {
   return (
       item.fieldType === fieldType.textField &&
-      ['text', 'number', 'email', 'url','password'].includes(item.type)
+      ['text', 'number', 'email', 'url','password','tel'].includes(item.type)
   );
 }
 
-
-
-// dynamic validation
+// --- Dynamic validation rules ---
 const rules = computed(() => generateValidationRules(props.schema.fields,localModel));
-//console.log('checking rules',rules.value);
 const v$ = useVuelidate(rules,localModel);
 
-//console.log('checking $v', v$.value);
-
-
 </script>
-<style  lang="scss">
-@import "@/assets/textField/defaultTextFieldStyle.scss";
-@import "@/assets/textField/customTextFieldStyle.scss";
-@import '@/assets/icon/iconDefault.scss';
-@import "@/assets/textField/userList.scss";
 
-
-</style>
-
-<style>
-
-
-</style>

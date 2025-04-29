@@ -1,0 +1,98 @@
+// Flex row for horizontal forms
+.dfutils__row {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  column-gap: 1em!important;
+}
+
+// Half-width fields (2-column layout)
+.dfutils__half {
+  width: calc(50% - 1em);
+}
+
+// Full-width field
+.dfutils__w_full {
+  width: 100% !important;
+}
+
+// Align label right
+.dfutils__label_right {
+  text-align: right;
+}
+
+// Center text
+.dfutils__text_center {
+  text-align: center;
+}
+
+// Small padding
+.dfutils__p_sm {
+  padding: 0.5em !important;
+}
+
+// Large padding
+.dfutils__p_lg {
+  padding: 1.5em !important;
+}
+
+// Remove input background and border
+.dfutils__input_transparent {
+  background: transparent !important;
+  border: none !important;
+}
+
+// Top/bottom margin
+.dfutils__mt_lg {
+  margin-top: 1.5em !important;
+}
+.dfutils__mb_lg {
+  margin-bottom: 1.5em !important;
+}
+
+// Visually hide (keep in DOM)
+.dfutils__hidden {
+  display: none !important;
+}
+
+// Bold label
+.dfutils__label_bold {
+  font-weight: 700 !important;
+}
+// ------------------------------------------------------
+// FORM FIELD VERTICAL PADDING UTILITIES (em-based)
+// For scalable, responsive field height.
+// Usage: customStyle.update('fieldAndError.field', 'dfutils__py_sm');
+// ------------------------------------------------------
+
+.dfutils__py_sm { padding-top: 0.6em !important; padding-bottom: 0.6em !important; }
+.dfutils__py_md { padding-top: 1em !important;  padding-bottom: 1em !important; }
+.dfutils__py_lg { padding-top: 1.4em !important;  padding-bottom: 1.4em !important; }
+
+// ------------------------------------------------------
+// FORM FIELD HORIZONTAL PADDING UTILITIES (em-based)
+// For consistent field side padding, works well with vertical.
+// Usage: customStyle.update('fieldAndError.field', 'dfutils__px_md');
+// ------------------------------------------------------
+
+.dfutils__px_sm { padding-left: 0.9em !important;  padding-right: 0.9em !important; }
+.dfutils__px_md { padding-left: 1.3em !important;  padding-right: 1.3em !important; }
+.dfutils__px_lg { padding-left: 1.8em !important;  padding-right: 1.8em !important; }
+
+// ------------------------------------------------------
+// FORM FIELD UNIFORM PADDING UTILITIES (em-based)
+// For all-sides padding in one class. Useful for single-line inputs.
+// Usage: customStyle.update('fieldAndError.field', 'dfutils__p_md');
+// ------------------------------------------------------
+
+.dfutils__p_sm { padding: 0.6em 0.9em !important; }
+.dfutils__p_md { padding: 1em 1.3em !important; }
+.dfutils__p_lg { padding: 1.4em 1.8em !important; }
+
+// Responsive: stack on small screens
+@media (max-width: 640px) {
+  .dfutils__half,
+  .dfutils__w_full {
+    width: 100% !important;
+  }
+}
