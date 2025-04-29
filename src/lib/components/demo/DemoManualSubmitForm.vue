@@ -28,6 +28,19 @@
 </template>
 
 <script setup>
+/**
+ * @file DemoManualSubmitForm.vue
+ * @summary Demonstrates manual form submission and external button control.
+ *
+ * Features:
+ * - Submit button and Reset button handled manually outside the form
+ * - Custom placement and styling of action buttons
+ * - Manually trigger form validation and submission through `handleSubmit()`
+ * - Reset form data to initial prefilled values
+ * - Supports required, email format, and age validation
+ *
+ * Intended to showcase how developers can control form actions independently while using the dynamic form system.
+ */
 import { ref, computed, reactive } from "vue";
 import DynamicForm from "@/components/DynamicForm/index.vue";
 import { FieldType } from "@/utils/dynamicForm/FieldTypeClass.js";

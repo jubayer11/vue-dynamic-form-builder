@@ -31,6 +31,19 @@
 </template>
 
 <script setup>
+/**
+ * @file DemoPopupForm.vue
+ * @summary Demonstrates rendering a fully functional form inside a modal popup.
+ *
+ * Features:
+ * - Opens a dynamic form inside a custom-built modal window
+ * - Submit and cancel buttons outside the form component
+ * - Manual submit trigger using exposed `handleSubmit()` function
+ * - Responsive and accessible modal (ESC key closes modal)
+ * - Includes field validation for name and email
+ *
+ * Intended to showcase dynamic form handling within modal dialogs without relying on any third-party UI libraries.
+ */
 import { ref, computed, reactive } from "vue";
 import DynamicForm from "@/components/DynamicForm/index.vue";
 import { FieldType } from "@/utils/dynamicForm/FieldTypeClass.js";

@@ -19,6 +19,18 @@
 </template>
 
 <script setup>
+/**
+ * @file DemoRowForm.vue
+ * @summary Demonstrates a responsive 2-column form layout using utility classes.
+ *
+ * Features:
+ * - Two-column desktop layout using `.dfutils__row` and `.dfutils__half` classes
+ * - Responsive stacking on smaller screen sizes (mobile-friendly)
+ * - Includes text fields, select fields, and date picker fields
+ * - Basic validations: required, email format, minLength
+ *
+ * Intended to showcase flexible layout control and form styling customization within the dynamic form system.
+ */
 import { ref, computed, reactive } from "vue";
 import DynamicForm from "@/components/DynamicForm/index.vue";
 import { FieldType } from "@/utils/dynamicForm/FieldTypeClass.js";

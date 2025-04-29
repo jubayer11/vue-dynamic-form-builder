@@ -28,6 +28,19 @@
 </template>
 
 <script setup>
+/**
+ * @file DemoDateForm.vue
+ * @summary Demonstrates all supported date and time picker types within a single form.
+ *
+ * Features:
+ * - Showcases six picker types: date, dateTime, month, time, year, week
+ * - Displays all types together for easy visual and functional testing
+ * - Supports manual submission through an external submit button
+ * - Dynamic formatting and internal value management for each picker type
+ *
+ * Intended to demonstrate full date/time flexibility within the dynamic form system.
+ */
+
 import { ref, computed, reactive } from "vue";
 import DynamicForm from "@/components/DynamicForm/index.vue";
 import { FieldType } from "@/utils/dynamicForm/FieldTypeClass.js";

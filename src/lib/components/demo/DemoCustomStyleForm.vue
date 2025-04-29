@@ -22,6 +22,21 @@
 </template>
 
 <script setup>
+/**
+ * @file DemoCustomStyleForm.vue
+ * @summary Demonstrates advanced per-field style overrides and dynamic styling control.
+ *
+ * Features:
+ * - Customize label alignment, colors, backgrounds, and borders per field
+ * - Different dropdown styles, tag styles, input focus rings, and icon colors
+ * - Example of custom inset icons for password fields
+ * - Fully custom error message styling
+ * - Demonstrates a rainbow-themed dropdown for creative flexibility
+ * - Submit button customized separately with dynamic classes
+ *
+ * Intended to showcase the system’s full flexibility for individually styling fields without affecting global form behavior.
+ */
+
 import { ref, computed, reactive } from "vue";
 import DynamicForm from "@/components/DynamicForm/index.vue";
 import { FieldType } from "@/utils/dynamicForm/FieldTypeClass.js";

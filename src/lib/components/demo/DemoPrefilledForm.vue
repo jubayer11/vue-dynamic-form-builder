@@ -23,6 +23,20 @@
 </template>
 
 <script setup>
+/**
+ * @file DemoPrefilledForm.vue
+ * @summary Demonstrates a basic form with prefilled data, field validation (including backend error simulation),
+ * select fields, multi-select fields, date pickers, and live feedback display.
+ *
+ * Features:
+ * - Simulate backend errors manually via toggle button
+ * - Prefill fields like name, email, sports, location, etc.
+ * - Show custom error messages injected from the backend
+ * - Supports required, email, minLength, between, and sameAs and custom validations
+ *
+ * Intended for demonstrating realistic user form interactions with schema-driven flexibility.
+ */
+
 import { ref, computed, reactive } from "vue";
 import DynamicForm from "@/components/DynamicForm/index.vue";
 import { FieldType } from "@/utils/dynamicForm/FieldTypeClass.js";
@@ -121,6 +135,9 @@ const ageField = new FieldType({
 });
 ageField.addValidations(ValidationSetup.between([18, 99], "Age must be between 18 and 99."));
 
+
+
+
 const groupField = new FieldType({
   fieldType: fieldType.selectField,
   label: "Group",
@@ -170,6 +187,19 @@ const detailsField = new FieldType({
   defaultValue: prefilled.details
 });
 
+detailsField.addValidations(
+    ValidationSetup.custom(
+        (value,formData) => {
+          if (value === formData.password){
+            return false;
+          }else{
+            return true;
+          }
+        },
+        'The details can not be password.'
+    )
+);
+
 const passwordField = new FieldType({
   fieldType: fieldType.passwordTextField,
   label: "Password",
@@ -178,8 +208,8 @@ const passwordField = new FieldType({
   mandatory: true,
   defaultValue: prefilled.password
 });
-passwordField.addValidations(ValidationSetup.required("Password required."));
-passwordField.addValidations(ValidationSetup.minLength(6, "Min 6 characters."));
+passwordField.addValidationsArray([ValidationSetup.required("Password required."),ValidationSetup.minLength(6, "Min 6 characters.")])
+
 
 const confirmPasswordField = new FieldType({
   fieldType: fieldType.textField,

@@ -5,7 +5,6 @@
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)  
 ![Demo Coming Soon](https://img.shields.io/badge/Demo-Coming%20Soon-blue)
 
-<!-- Divider after badges -->
 ---
 
 ## Build fully customizable, schema-driven forms — with complete developer freedom.
@@ -13,7 +12,6 @@
 Vue Dynamic Form Builder gives you the tools to create fully dynamic, validated, and beautifully styled forms — while keeping total control over structure, behavior, layout, and appearance.  
 It’s built to empower developers who want flexibility beyond typical rigid form builders.
 
-<!-- Divider after intro paragraph -->
 ---
 
 ## 🚀 Why Use Vue Dynamic Form Builder?
@@ -36,9 +34,7 @@ It’s built to empower developers who want flexibility beyond typical rigid for
 - **Frontend-Agnostic:**  
   Designed to adapt easily to any backend API and frontend system — with no assumptions about your stack or styling.
 
-<!-- Divider after Why Use -->
 ---
-
 ## 🏗️ Internal Structure Overview
 
 Vue Dynamic Form Builder is built with a lightweight, highly modular internal architecture to maximize flexibility and developer control.
@@ -114,8 +110,8 @@ The internal flow of the Dynamic Form system is simple yet powerful:
 ✅ **Result:**  
 You get a real-world form builder that feels **native, flexible, and fully under your control** — while staying lightweight, fast, and clean.
 
-<!-- Divider after Internal Structure Overview -->
 ---
+
 ## 🛠️ Field Types Overview
 
 Vue Dynamic Form Builder supports a range of field types, covering most common real-world form needs.  
@@ -125,11 +121,13 @@ Each field type can be customized individually for label, placeholder, validatio
 |:---|:---|
 | `textField` | Standard single-line input (text, email, number, tel, url, etc.) |
 | `textArea` | Multi-line text input for longer content (comments, descriptions, etc.) |
-| `selectField` | Single-select dropdown list |
-| `radioField` | Radio button group for choosing one option from multiple |
-| `multiSelect` | Multi-select dropdown with tag-style selections |
-| `passwordTextField` | Password input field with hidden characters |
-| `datePickerField` | Modern date/time picker supporting date, time, month, week, and year modes |
+| `selectField` | Single-select dropdown list. |
+| `radioField` | Radio button group for choosing one option from multiple. |
+| `multiSelect` | Multi-select dropdown with tag-style selections. |
+| `passwordTextField` | Password input field with hidden characters. |
+| `datePickerField` | Modern date/time picker supporting date, time, month, week, and year modes. |
+
+---
 
 ✅ All field types are internally modular — meaning you can easily extend, customize, or override their behavior as needed.
 
@@ -137,9 +135,7 @@ Each field type can be customized individually for label, placeholder, validatio
 
 ✅ The system is designed to be flexible — you can mix multiple field types in a single form freely.
 
-<!-- Divider after Field Types Overview -->
 ---
-
 ## ✨ Features
 
 - **Schema-Driven:**  
@@ -186,9 +182,7 @@ Each field type can be customized individually for label, placeholder, validatio
 - **No UI Framework Lock-in:**  
   Seamlessly integrate with your own CSS, Tailwind, Bootstrap, or any design system of your choice.
 
-<!-- Divider after Features -->
 ---
-
 ## 📦 Installation
 
 ```bash
@@ -203,7 +197,6 @@ cd vue-dynamic-form-builder
 npm install
 ```
 
-<!-- Divider after Installation -->
 ---
 
 ## ⚙️ Required Peer Dependencies
@@ -224,25 +217,23 @@ npm install vue @vuelidate/core @vuelidate/validators
 ✅ You do not need to manually import or configure Vuelidate inside your app.  
 It is automatically handled inside the Dynamic Form system.
 
-<!-- Divider after Peer Dependencies -->
 ---
 
 ## 📦 Included Internal Dependencies
 
 The following libraries are bundled inside the Dynamic Form Builder package:  
-(You do not need to install these separately.)
+(You do not need to install these separately)
 
 | Library | Purpose |
 |:---|:---|
-| moment | Flexible and reliable date/time formatting |
-| lodash (isEqual) | Internal deep object comparison for form data checking |
-| @vuepic/vue-datepicker | Lightweight and modern Date/Time picker UI for date-related fields |
+| moment | Flexible and reliable date/time formatting. |
+| lodash (isEqual) | Internal deep object comparison for form data checking. |
+| @vuepic/vue-datepicker | Lightweight and modern Date/Time picker UI for date-related fields. |
 
 ✅ These dependencies are handled and maintained inside the package.  
 ✅ No manual installation or imports needed.
 
-<!-- Divider after Internal Dependencies -->
----
+
 
 ## ⚡ Quick Start
 
@@ -259,7 +250,7 @@ Get started immediately with just a few lines of code!
 
 <script setup>
 import { ref, computed, reactive } from 'vue';
-import { FieldType, CustomizableTextField } from '@jubayer/vue-dynamic-form-builder';
+import { FieldType, CustomizableTextField } from '@jubayer/vue-dynamic-form-builder'; 
 
 const nameField = new FieldType({
   fieldType: 'textField',
@@ -285,8 +276,9 @@ function handleSubmit() {
 - Form data two-way bound via `v-model`
 - Manual submit action (`@submit` event)
 
-<!-- Divider after Quick Start -->
 ---
+
+
 ## 🛠️ Schema Structure
 
 Every form is generated dynamically based on a **schema object**.
@@ -317,8 +309,18 @@ data.addField(nameField);
 
 ✅ The system is fully dynamic — you control fields, design, validations, and behavior via pure JavaScript.
 
----
+```javascript
+const nameField = new FieldType({
+  fieldType: 'textField',
+  label: 'Name',
+  forType: 'name',
+});
+data.addField(nameField);
+```
 
+You can add validation, default values, field-specific styles, and more.
+
+---
 ## 🎨 Styling & Design Customization
 
 Use `updateStyle()` to control field design flexibly at different levels.
@@ -345,11 +347,9 @@ Final applied class order:
 />
 ```
 
----
-
 ### ✨ How to Customize
 
-- **Schema Level (affect all fields together):**
+- **Schema Level (Affect all fields together)**:
   ```javascript
   import { CustomizableFieldsStyle } from 'vue-dynamic-form-builder';
 
@@ -359,53 +359,55 @@ Final applied class order:
   data.updateStyle(customStyle);
   ```
 
-- **Field Level (affect a specific field only):**
+- **Field Level (Affect a specific field only)**:
   ```javascript
   username.updateStyle('fieldAndError.field', 'dfutils__bg_lightblue dfutils__rounded_lg dfutils__py_lg');
   username.updateStyle('label.label', 'text-bold text-green-600');
   ```
 
-✅ You can override:
-- Input appearance
-- Label styling
-- Dropdown behavior
-- Multi-select tags
-- Error display
-- Submit button styling
+### 👉 You Can Override:
 
-✅ You can fully mix TailwindCSS, Bootstrap, or custom CSS classes easily.
+- Field input appearance
+- Label styling and alignment
+- Dropdown wrapper, input, item, selection
+- Multi-select tag view and dropdown
+- Validation error message display
+- Inset icon styles (password fields, custom icons)
+- Submit button look and feel
+
+✅ You can mix it easily with your own utility classes (Tailwind, Bootstrap, etc.) or create your own custom classes.
+
+✅ Layout-level design changes (row layout, column width, spacing) are best handled at the **schema-level** (`CustomizableFieldsStyle`).
+
+✅ Specific per-field fine-tuning (color, background, margin) is best handled at the **field-level** (`FieldType.updateStyle()`).
 
 ---
+### 📜 Validation System
 
-## 📜 Validation System
-
-The Dynamic Form Builder includes a powerful **schema-based validation system** powered by [Vuelidate](https://vuelidate-next.netlify.app/).
-
+The Dynamic Form Builder includes a powerful **schema-based validation system** powered by [Vuelidate](https://vuelidate-next.netlify.app/).  
 Each field can define validations declaratively during schema setup — no manual form-wide watchers or rules.
 
 ---
 
 ### ✅ How to Add Validations
 
-Attach validations using either:
+You can attach validations using either `addValidations()` or `addValidationsArray()`:
 
-```javascript
-nameField.addValidations(ValidationSetup.required('Name is required.'));
-nameField.addValidations(ValidationSetup.minLength(2, 'Min 2 characters.'));
+```js
+nameField.addValidations(ValidationSetup.required("Name is required."));
+nameField.addValidations(ValidationSetup.minLength(2, "Min 2 characters"));
 ```
 
-Or attach multiple validations at once:
-
-```javascript
+```js
 passwordField.addValidationsArray([
-  ValidationSetup.required('Password required.'),
-  ValidationSetup.minLength(6, 'Min 6 characters.')
+  ValidationSetup.required("Password required."),
+  ValidationSetup.minLength(6, "Min 6 characters.")
 ]);
 ```
 
-You can also skip message for auto-label fallback:
+You can also skip the message for auto-label fallback:
 
-```javascript
+```js
 emailField.addValidations(ValidationSetup.email());
 ```
 
@@ -413,9 +415,15 @@ emailField.addValidations(ValidationSetup.email());
 
 ### 🔐 Custom Validations
 
-Use `ValidationSetup.custom()` to define full logic-based validations:
+Your form supports full **custom logic validation** via `ValidationSetup.custom()`.
 
-```javascript
+Each custom validator receives:
+- `value` → current field value
+- `formData` → full live form object
+
+✅ Must return `true` for valid, `false` for invalid.
+
+```js
 sportsField.addValidations(
   ValidationSetup.custom(
     (value) => Array.isArray(value) && value.length <= 3,
@@ -424,9 +432,18 @@ sportsField.addValidations(
 );
 ```
 
-Or field-to-field comparisons:
+```js
+titleField.addValidations(
+  ValidationSetup.custom(
+    (value, formData) => value === formData.password,
+    'Title must match your password.'
+  )
+);
+```
 
-```javascript
+You can even negate matches:
+
+```js
 detailsField.addValidations(
   ValidationSetup.custom(
     (value, formData) => value !== formData.password,
@@ -435,64 +452,96 @@ detailsField.addValidations(
 );
 ```
 
-✅ Custom functions receive both `value` and the full `formData`.
-
-✅ Must return `true` (valid) or `false` (invalid).
-
 ---
 
 ### 🧩 Supported Validation Methods
 
 | Method | Description |
-|:---|:---|
-| `required()` | Must not be empty |
-| `email()` | Must be valid email |
+|--------|-------------|
+| `required()` | Value must not be empty |
+| `email()` | Must be valid email format |
 | `minLength(n)` | Minimum string length |
 | `maxLength(n)` | Maximum string length |
-| `minValue(n)` | Minimum number |
-| `maxValue(n)` | Maximum number |
-| `between([min, max])` | Number must be between |
-| `sameAs(fieldName)` | Field must match another field |
+| `minValue(n)` | Minimum numeric value |
+| `maxValue(n)` | Maximum numeric value |
+| `between([min, max])` | Numeric range inclusive |
+| `sameAs(fieldName)` | Match another field’s value |
 | `url()` | Must be a valid URL |
 | `integer()` | Must be a whole number |
-| `decimal()` | Must be a float |
-| `custom(fn)` | Fully custom validation logic |
+| `decimal()` | Must be a float/decimal number |
+| `custom(fn)` | Custom validation logic (return true/false) |
+
+---
+
+### 📌 Notes
+
+- Use `.addValidations()` for single rules
+- Use `.addValidationsArray([...])` for multiple rules
+- Custom validations can leverage the full `formData` object
+
+---
+
+### 🧠 Example Full Setup
+
+```js
+const passwordField = new FieldType({
+  fieldType: 'passwordTextField',
+  forType: 'password',
+  label: 'Password',
+  mandatory: true,
+  placeholder: 'Enter password',
+  defaultValue: 'secret123'
+});
+
+passwordField.addValidationsArray([
+  ValidationSetup.required('Password is required.'),
+  ValidationSetup.minLength(6, 'Password must be at least 6 characters.')
+]);
+
+const confirmPasswordField = new FieldType({
+  fieldType: 'textField',
+  forType: 'password_confirmation',
+  label: 'Confirm Password',
+  type: 'password',
+  defaultValue: 'secret123'
+});
+
+confirmPasswordField.addValidations(
+  ValidationSetup.sameAs('password', 'Passwords must match.')
+);
+```
+
+You can add all of this dynamically inside a reactive form schema builder.
 
 ---
 
 ### 📡 Backend Error Injection (Recommended)
 
-Whether using auto or manual submit — you can inject backend validation errors easily:
+Whether you're using auto or manual submit — you can inject backend/server-side validation errors like this:
 
-```javascript
+```js
 data.setErrors({
-  email: 'This email is already registered.',
-  name: 'Username already taken.'
+  email: "This email is already registered.",
+  name: "Username already taken.",
 });
 ```
 
-✅ Keys must match `forType` defined during field creation.
+For real-world usage, wrap your submit logic in `try/catch`:
 
-✅ Display will automatically happen (highlighted error + message).
-
----
-
-### 🧠 Real-world Backend Example:
-
-```javascript
+```js
 const handleSubmit = async () => {
   try {
     startAnimation();
     const response = await yourApiCall(formData.value);
 
     if (response.success) {
-      alert('Form submitted successfully!');
+      alert("Form submitted successfully!");
     }
   } catch (error) {
     if (error?.response?.data?.errors) {
       data.setErrors(error.response.data.errors);
     } else {
-      console.error('Unexpected error:', error);
+      console.error("Unexpected error:", error);
     }
   } finally {
     stopAnimation();
@@ -500,40 +549,51 @@ const handleSubmit = async () => {
 };
 ```
 
-✅ No need to manually track field-level errors — DynamicForm handles it internally.
+✅ Works the same for **manual** and **automatic** form submissions.  
+✅ Display logic is built-in — fields will highlight and show error messages automatically.
 
-<!-- Divider after Validation System -->
 ---
 
 ## 👐 Manual vs Automatic Submit
 
-By default, DynamicForm renders a built-in submit button inside the form.
+By default, the DynamicForm renders its own submit button inside the form.
 
-✅ But you can disable it and manage submission **fully manually**.
+You can **choose** between:
+
+| Type | Description |
+|:---|:---|
+| **Automatic Submit** | Built-in submit button appears automatically. |
+| **Manual Submit** | Disable built-in submit and control everything yourself (buttons, loading, etc.) |
 
 ---
 
 ### 🔹 Automatic Submit (default)
 
-```javascript
+Just let the form render its own button:
+
+```js
 const data = reactive(new CustomizableTextField());
-data.updateSubmitButton(true, 'Submit');
+data.updateSubmitButton(true, 'Submit'); // Label is customizable
+
+const formSchema = computed(() => data);
 ```
 
-✅ Clicking submit triggers validation and fires `@submit` event automatically.
+✅ When the user clicks **Submit**, validation and submit handling happens automatically.
 
 ---
 
 ### 🔹 Manual Submit
 
-You can disable the built-in submit button:
+You can disable the built-in button:
 
-```javascript
+```js
 const data = reactive(new CustomizableTextField());
-data.updateSubmitButton(false);
+data.updateSubmitButton(false); // No submit button inside the form
+
+const formSchema = computed(() => data);
 ```
 
-And manage the form from the parent:
+Then control the submission manually from **outside**:
 
 ```vue
 <template>
@@ -543,16 +603,29 @@ And manage the form from the parent:
     ref="customForm"
     @submit="handleSubmit"
   />
-  <button @click="manualSubmit">Submit</button>
-  <button @click="resetForm">Reset</button>
+
+  <div class="action-buttons">
+    <button @click="manualSubmit">Submit</button>
+    <button @click="resetForm">Reset</button>
+  </div>
 </template>
 
 <script setup>
+import { ref, computed, reactive } from 'vue';
+import { CustomizableTextField } from 'vue-dynamic-form-builder';
+
 const customForm = ref(null);
+const data = reactive(new CustomizableTextField());
+const formSchema = computed(() => data);
+const formData = ref(data.createInitialDataObject());
+
+function handleSubmit() {
+  console.log('Form submitted:', formData.value);
+}
 
 function manualSubmit() {
   if (customForm.value && typeof customForm.value.handleSubmit === 'function') {
-    customForm.value.handleSubmit();
+    customForm.value.handleSubmit(); // Triggers validation + submit
   }
 }
 
@@ -562,11 +635,49 @@ function resetForm() {
 </script>
 ```
 
-✅ Full control over:
+✅ You are **fully in charge** of:
 - Button placement
-- Loading states
-- Conditional disables
-- Popup-confirm submissions
+- Button text
+- Reset/clear form actions
+- Loading indicators
+
+✅ Perfect for advanced flows like popups, confirmation modals, loading spinners, etc.
+
+---
+
+### ✅ Advantages of Manual Mode
+- Custom UX (e.g., confirmation popup before submitting)
+- Better control over loading states
+- Dynamic disable/enable of buttons based on form state
+
+---
+
+### ✅ Advantages of Automatic Mode
+- Faster setup for simple forms
+- No need to manually handle submit
+
+---
+
+### 📢 Important Tip
+
+> Regardless of manual or automatic submission, backend/server-side error handling (e.g., `data.setErrors()`) is a separate topic and explained under the **Validation System** section.
+
+
+```js
+data.setErrors({
+  email: "Email already taken.",
+  name: "Name already in use."
+});
+```
+
+---
+
+### 🎯 Conclusion
+
+| When | Recommendation |
+|:---|:---|
+| Quick basic forms | Use Automatic Submit |
+| Custom flow needed (modals, confirm, multi-steps) | Use Manual Submit |
 
 ---
 ## ❓ FAQ
@@ -611,14 +722,14 @@ function manualSubmit() {
 
 ### 3. How do I disable the built-in submit button and control buttons manually?
 
-By default, the built-in submit button is disabled.  
-But to ensure manual control, call:
+By default, built-in submit button is disabled.  
+But if you want to make sure manually:
 
 ```javascript
 data.updateSubmitButton(false); // Disables built-in submit button
 ```
 
-✅ You can then manage Submit/Reset externally.
+✅ Then you can control Submit/Reset buttons completely from outside the form.
 
 ---
 
@@ -627,28 +738,49 @@ data.updateSubmitButton(false); // Disables built-in submit button
 Inside your submit method (usually in a `try/catch` block), you can inject backend errors like this:
 
 ```javascript
+const handleSubmit = async () => {
+  try {
+    startAnimation();
+    const response = await yourApiCall(formData.value);
+
+    if (response.success) {
+      alert("Form submitted successfully!");
+    }
+  } catch (error) {
+    if (error?.response?.data?.errors) {
+      data.setErrors(error.response.data.errors);
+    } else {
+      console.error("Unexpected error:", error);
+    }
+  } finally {
+    stopAnimation();
+  }
+};
+```
+
+✅ Backend errors should match the `forType` of your fields:
+
+```javascript
 data.setErrors({
   email: "This email is already registered.",
   name: "Username already taken.",
 });
 ```
 
-✅ Backend error keys must match field `forType`.
-
-✅ DynamicForm automatically highlights the field and shows the message.
+✅ `forType: "email"` in your field and `email` key in your error object must match.
 
 ---
 
 ### 5. How do I apply custom styles to a specific field only?
 
-Use `updateStyle()`:
+You can override the classes of a single field by using `updateStyle()`:
 
 ```javascript
 username.updateStyle("fieldAndError.field", "dfutils__bg_lightblue dfutils__rounded_lg dfutils__py_lg");
 username.updateStyle("label.label", "dfutils__label_right dfutils__label_bold dfutils__label_green");
 ```
 
-✅ Field-specific styling is very flexible.
+✅ You can customize different parts like input field, label, error message, dropdown item, etc.
 
 ---
 
@@ -658,15 +790,28 @@ Yes!
 You can set `defaultValue` when creating a field:
 
 ```javascript
+const prefilled = {
+  username: "jubayer",
+  email: "jubayer@email.com",
+};
+
 const username = new FieldType({
   fieldType: fieldType.textField,
   label: "Username",
   forType: "username",
-  defaultValue: "jubayer",
+  defaultValue: prefilled.username,
+});
+
+const email = new FieldType({
+  fieldType: fieldType.textField,
+  label: "Email",
+  forType: "email",
+  type: "email",
+  defaultValue: prefilled.email,
 });
 ```
 
-✅ Prefills initial values inside the form automatically.
+✅ The form will be prefilled automatically with these values.
 
 ---
 
@@ -674,44 +819,60 @@ const username = new FieldType({
 
 Currently, **the package does not officially provide dynamic add/remove after creation**.
 
-✅ You could manipulate the schema manually and rebuild, but the focus is on predefining a clean schema first.
+However, technically, you could manipulate the schema and rebind the form manually if needed.  
+It would involve rebuilding the schema and resetting the form — but this is an advanced use case.
+
+✅ Focus is on defining a clean schema first, not dynamic field injection at runtime.
 
 ---
 
 ### 8. Can I create a fully custom field type if needed?
 
 Yes!  
-Since fields like `TextField.vue` and `DatePickerField.vue` are modular components:
+Since each field (e.g., `TextField.vue`, `DatePickerField.vue`) is modular, you can:
 
-✅ You can create your own field component.  
-✅ Extend DynamicForm easily.  
-✅ Handle validation, styling, and schema mapping yourself.
+- Create your own custom field component.
+- Add it to your system by extending the form builder classes.
+- Manage its validation, style, and data manually.
+
+✅ This system is extensible — not locked to predefined fields only.
 
 ---
 
 ### 9. How do I validate a field using a custom validation function?
 
-Use `ValidationSetup.custom()`:
+You can add custom validation using `ValidationSetup.custom()`:
 
 ```javascript
 detailsField.addValidations(
   ValidationSetup.custom(
     (value, formData) => value !== formData.password,
-    "Details cannot match the password."
+    'The details cannot match your password.'
   )
 );
 ```
 
-✅ You have full access to the current field value and the entire form.
+Or for array validation:
+
+```javascript
+sportsField.addValidations(
+  ValidationSetup.custom(
+    (value) => Array.isArray(value) && value.length <= 3,
+    "You can select up to 3 sports only."
+  )
+);
+```
+
+✅ Custom functions receive `value` and full `formData`, and must return `true` (valid) or `false` (invalid).
 
 ---
 
 ### 10. Can I use the form inside a popup modal? How does validation and submission behave inside modals?
 
 Yes!  
-DynamicForm works perfectly inside a popup/modal.
+You can render the `<DynamicForm>` inside a popup/modal without any issues.
 
-Example:
+Example (`DemoPopupForm.vue`):
 
 ```vue
 <DynamicForm
@@ -722,29 +883,38 @@ Example:
 />
 
 <button @click="manualSubmit">Submit</button>
+
+<script setup>
+function manualSubmit() {
+  if (popupForm.value && typeof popupForm.value.handleSubmit === "function") {
+    popupForm.value.handleSubmit(); // Triggers validation and submit
+  }
+}
+</script>
 ```
 
-✅ Manual submission inside modals works exactly like outside forms.
+✅ Validation, manual submit, and backend error handling work exactly the same inside modals as outside.
 
-✅ No third-party libraries needed — just your custom modal.
+✅ No third-party UI libraries needed — you can use your own modal implementation.
 
-<!-- Divider after FAQ -->
 ---
+
 
 ## 🧪 Demo Gallery
 
 Explore real-world examples of how you can use `@jubayer/vue-dynamic-form-builder` to build powerful and flexible forms.
 
-Each example is available inside the `demo/` folder.
+Each example is available inside the `demo/` folder.  
+(You can also see live previews in the demo app.)
 
 | Demo | Highlights |
 |:---|:---|
-| **Basic Prefilled Form** | Prefilled data, required fields, email validation, backend error simulation |
-| **Row/Column Layout Form** | Responsive row layout, half-width fields, structured grouping |
-| **Manual Submit + Custom Buttons** | External submit/reset buttons, full manual control |
-| **Custom Styling per Field** | Per-field label, input, and error styling overrides |
-| **Popup Form in Modal** | Full form handling inside a modal |
-| **All Date/Time Picker Modes** | Supports date, time, month, week, and year picking |
+| **Basic Prefilled Form** | Prefilled data, required fields, email validation, realistic backend error simulation |
+| **Row/Column Layout Form** | Responsive row-based layout, half-width fields, structured visual grouping |
+| **Manual Submit + Custom Buttons** | External submit and reset buttons, full manual form control |
+| **Custom Styling per Field** | Customize label, input, error styling at the individual field level |
+| **Popup Form in Modal** | Form working inside a modal, handles validation and submission properly |
+| **All Date/Time Picker Modes** | Includes date, time, month, week, and year pickers |
 
 🔗 **Live Demo**: Coming Soon
 
@@ -759,33 +929,28 @@ Each example is available inside the `demo/` folder.
 | Popup Form in Modal | `demo/DemoPopupForm.vue` |
 | All Date/Time Picker Modes | `demo/DemoDateForm.vue` |
 
-✅ Demos are real-world, production-grade examples.
+---
 
-<!-- Divider after Demo Gallery -->
+✅ **Note:**  
+The demos use real schema-driven configurations, realistic validations, and show flexible form layouts.  
+They reflect **production-grade use cases** — not just basic examples.
+
 ---
 
 ## 📜 License
-
 [MIT License](./LICENSE) © 2025 Jubayer Ahmed
 
-<!-- Divider after License -->
 ---
-
 ## 🙌 Credits
-
-Designed and developed with ❤️ by **Jubayer Ahmed** ([Portfolio](https://www.jubayerahmed.com/)) — Dynamic Systems • Clean Code • Developer Empowerment
-
-<!-- Divider after Credits -->
+Designed and developed with ❤️ by  
+**Jubayer Ahmed**  
+Dynamic Systems • Clean Code • Developer Empowerment
 ---
-
 ## 🎯 Final Touches
-
 - Full Vue 3 + Composition API ready
 - 100% lightweight and modular
 - No rigid styles — you control everything
 - Inspired by real-world problems, built for serious developers
-
-<!-- Divider after Final Touches -->
 ---
 
 ✨ End of README ✨
@@ -794,4 +959,3 @@ If you enjoy this package, consider starring ⭐ the repository — it helps mor
 
 🤝 Interested in contributing?  
 Feel free to open issues, suggest improvements, or submit pull requests — collaboration is always welcome!
-
