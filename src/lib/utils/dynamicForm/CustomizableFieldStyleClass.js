@@ -135,7 +135,6 @@ export class CustomizableFieldsStyle {
     update(property, value, obj = this) {
         const keys = property.split('.');
         const lastKey = keys.pop();
-        console.log(property);
         let target = obj;
         for (const key of keys) {
             if (!(key in target)) {

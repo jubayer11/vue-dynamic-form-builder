@@ -3,7 +3,9 @@
 ![Vue 3 Compatible](https://img.shields.io/badge/Vue%203-Compatible-%23349b43)  
 ![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)  
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)  
-![Demo Coming Soon](https://img.shields.io/badge/Demo-Coming%20Soon-blue)
+![Demo Coming Soon](https://img.shields.io/badge/Demo-Coming%20Soon-blue)  
+![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+
 
 <!-- Divider after badges -->
 ---

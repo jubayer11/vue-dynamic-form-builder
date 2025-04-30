@@ -2,7 +2,7 @@
   <div class="dfdemo__container">
 
     <header class="dfdemo__header">
-      <h1>Vue Dynamic Form System</h1>
+      <h1>Vue Dynamic Form Builder</h1>
       <p class="dfdemo__subtitle">
         Build dynamic, schema-driven forms with customizable layout, validation, and styling — with full developer control.<br>
         <small>Designed and developed by <a href="https://jubayerahmed.com/" target="_blank" class="dfdemo__author">Jubayer Ahmed</a></small>
@@ -88,6 +88,7 @@
         <a class="dfdemo__author" href="https://jubayerahmed.com/" target="_blank"> <strong>Jubayer Ahmed</strong> </a>
         <span>•</span>
         <small>Dynamic Systems, Clean Code</small><br />
+        <small>Vue Dynamic Form Builder v1.0.0</small>
         <small>© 2025 All Rights Reserved</small><br />
         <small>See full documentation in <a href="https://github.com/YOUR_GITHUB/vue-dynamic-form-builder" target="_blank">README.md</a></small>
       </div>
@@ -116,6 +117,10 @@ import Documentation from "@/components/demo/Documentation.vue";
 html {
   scroll-behavior: smooth;
 }
+html, body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
 </style>
 <style scoped>
 /* ====== Layout Styles ====== */
