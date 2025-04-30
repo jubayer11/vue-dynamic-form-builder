@@ -90,7 +90,7 @@
         <small>Dynamic Systems, Clean Code</small><br />
         <small>Vue Dynamic Form Builder v1.0.10</small>
         <small>© 2025 All Rights Reserved</small><br />
-        <small>See full documentation in <a href="https://github.com/YOUR_GITHUB/vue-dynamic-form-builder" target="_blank">README.md</a></small>
+        <small>See full documentation in <a href="https://github.com/jubayer11/vue-dynamic-form-builder" target="_blank">README.md</a></small>
       </div>
     </footer>
 

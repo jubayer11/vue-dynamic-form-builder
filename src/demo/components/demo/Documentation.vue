@@ -62,7 +62,7 @@
     <p class="dfdemo__section-desc" style="margin-top: 2em; font-style: italic;">
       More detailed documentation coming soon.<br />
       For now, refer to the
-      <a href="https://github.com/YOUR_GITHUB/vue-dynamic-form-builder" target="_blank" class="dfdemo__author">
+      <a href="https://github.com/jubayer11/vue-dynamic-form-builder" target="_blank" class="dfdemo__author">
         GitHub README
       </a>
       for complete setup and examples.
