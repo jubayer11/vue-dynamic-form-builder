@@ -1,3 +1,4 @@
+// vite.config.lib.js
 import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import { fileURLToPath, URL } from 'node:url';
@@ -21,8 +22,14 @@ export default defineConfig({
                 globals: {
                     vue: 'Vue',
                 },
+                assetFileNames: (assetInfo) => {
+                    if (assetInfo.name === 'style.css' || assetInfo.name?.endsWith('.css')) {
+                        return 'style.css'; // ✅ always output CSS as style.css
+                    }
+                    return assetInfo.name;
+                },
             },
         },
-        cssCodeSplit: true, // ✅ outputs separate
+        cssCodeSplit: true,
     },
 });
