@@ -1,8 +1,80 @@
 @use '@/assets/_customColor.scss' as *;
 @use "sass:color";
 
+/* Global Reset */
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size: 16px;
+  color: #111;
+  background-color: #fff;
+}
+
+/* Inputs, Textareas, Selects */
+input,
+select,
+textarea {
+  color: #111;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  padding: 0.5rem;
+  font-size: 1rem;
+  outline: none;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: #2563eb; // blue-600
+  box-shadow: 0 0 0 1px #2563eb;
+}
+
+/* Custom Dropdowns or Third-Party Datepickers */
+.dp__input,
+.dp__menu {
+  color: #111;
+  background-color: #fff;
+}
+
+/* Form Label */
+label {
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  display: inline-block;
+  color: #111;
+}
+
+/* Disabled or Readonly Styles */
+input:disabled,
+select:disabled,
+textarea:disabled {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
+
+/* Custom Field Wrapper (Optional) */
+.textField {
+  &__default {
+    margin-bottom: 1.25rem;
+  }
+
+  &__label {
+    display: block;
+    margin-bottom: 0.25rem;
+    font-weight: 600;
+    color: #111;
+  }
+
+  &__error {
+    color: #dc2626; // red-600
+    font-size: 0.875rem;
+    margin-top: 0.25rem;
+  }
 }
 
 .textField {
@@ -179,6 +251,7 @@
                 left: 0;
                 margin-top: 0.25em;
                 z-index: 1000;
+                color: $inputText;
 
               }
               &__input {
@@ -351,9 +424,10 @@
                   padding: 0.35em 0.2em;
                   cursor: pointer;
                   border-radius: 0.2em;
-
+                  color: $inputText;
                   &:hover {
                     background: $secondary;
+                    color: $white;
                   }
 
                   &__box {
@@ -378,7 +452,7 @@
                   }
                   &__item {
                     font-size: 1em;
-                    color: $inputText;
+
                   }
                 }
               }

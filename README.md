@@ -245,7 +245,13 @@ Add this line in your project (typically in `main.js` or `main.ts`):
 ```js
 import '@jubayer11/vue-dynamic-form-builder/dist/style.css';
 ```
+✅ This ensures all form fields, inputs, and components are styled as intended.
+✅ Alternatively, you can also import it inside any local Vue component where the form is used:
 
+```js
+import '@jubayer11/vue-dynamic-form-builder/dist/style.css';
+```
+No SCSS setup is needed — everything is already compiled into CSS!
 
 Then, to run locally:
 
