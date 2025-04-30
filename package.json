@@ -1,6 +1,6 @@
 {
   "name": "@jubayer11/vue-dynamic-form-builder",
-  "version": "1.0.5",
+  "version": "1.0.6",
   "main": "dist/vue-dynamic-form-builder.umd.js",
   "module": "dist/vue-dynamic-form-builder.es.js",
   "exports": {
