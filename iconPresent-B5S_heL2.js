@@ -1,0 +1,38 @@
+import { createElementBlock as o, openBlock as n, normalizeClass as t, createElementVNode as _ } from "vue";
+const i = {
+  __name: "iconPresent",
+  props: {
+    icon: {
+      type: String,
+      default: "icon__default__icon"
+    },
+    path: {
+      type: Array,
+      default: ["icon__default__icon__path1", "icon__default__icon__path2"]
+    },
+    stroke: {
+      type: Array,
+      default: ["icon__default__icon__stroke1", "icon__default__icon__stroke2"]
+    }
+  },
+  setup(e) {
+    return (r, a) => (n(), o("svg", {
+      class: t([e.icon]),
+      viewBox: "0 0 14 11",
+      fill: "none",
+      xmlns: "http://www.w3.org/2000/svg"
+    }, [
+      _("path", {
+        class: t([e.stroke[0]]),
+        d: "M13 1L4.75 10L1 5.90909",
+        stroke: "white",
+        "stroke-width": "2",
+        "stroke-linecap": "round",
+        "stroke-linejoin": "round"
+      }, null, 2)
+    ], 2));
+  }
+};
+export {
+  i as default
+};
