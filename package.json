@@ -1,6 +1,6 @@
 {
   "name": "@jubayer11/vue-dynamic-form-builder",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "dist/vue-dynamic-form-builder.umd.js",
   "module": "dist/vue-dynamic-form-builder.es.js",
   "exports": {
@@ -9,12 +9,22 @@
       "require": "./dist/vue-dynamic-form-builder.umd.js"
     }
   },
-  "files": ["dist", "README.md", "LICENSE"],
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
   "type": "module",
   "license": "MIT",
   "author": "Jubayer Ahmed <ahmedjubayer54@gmail.com>",
   "description": "Vue 3 schema-driven dynamic form builder with flexible validation, styling, and real-world use case demos.",
-  "keywords": ["vue3", "form-builder", "dynamic-forms", "vuelidate", "schema-based"],
+  "keywords": [
+    "vue3",
+    "form-builder",
+    "dynamic-forms",
+    "vuelidate",
+    "schema-based"
+  ],
   "repository": {
     "type": "git",
     "url": "https://github.com/jubayer11/vue-dynamic-form-builder.git"
