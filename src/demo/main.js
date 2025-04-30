@@ -1,7 +1,6 @@
 import { createApp } from 'vue'
 
-import App from '@/demo/App.vue'
-
+import App from './App.vue'
 import '@/assets/textField/defaultTextFieldStyle.scss'
 import '@/assets/textField/formUtils.scss'
 

@@ -104,13 +104,13 @@
  * @author Jubayer
  */
 
-import DemoPrefilledForm from "@/components/demo/DemoPrefilledForm.vue";
-import DemoRowForm from "@/components/demo/DemoRowForm.vue";
-import DemoManualSubmitForm from "@/components/demo/DemoManualSubmitForm.vue";
-import DemoCustomStyleForm from "@/components/demo/DemoCustomStyleForm.vue";
-import DemoPopupForm from "@/components/demo/DemoPopupForm.vue";
-import DemoDateForm from "@/components/demo/DemoDateForm.vue";
-import Documentation from "@/components/demo/Documentation.vue";
+import DemoPrefilledForm from "@demo//components/demo/DemoPrefilledForm.vue";
+import DemoRowForm from "@demo/components/demo/DemoRowForm.vue";
+import DemoManualSubmitForm from "@demo/components/demo/DemoManualSubmitForm.vue";
+import DemoCustomStyleForm from "@demo/components/demo/DemoCustomStyleForm.vue";
+import DemoPopupForm from "@demo/components/demo/DemoPopupForm.vue";
+import DemoDateForm from "@demo/components/demo/DemoDateForm.vue";
+import Documentation from "@demo/components/demo/Documentation.vue";
 </script>
 
 <style>

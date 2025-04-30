@@ -1,10 +1,12 @@
 # Vue Dynamic Form Builder
 
 ![Vue 3 Compatible](https://img.shields.io/badge/Vue%203-Compatible-%23349b43)  
-![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)  
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)  
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)  
-![Demo Coming Soon](https://img.shields.io/badge/Demo-Coming%20Soon-blue)  
-![Version](https://img.shields.io/badge/version-1.0.0-blue.svg)
+[![Live Demo](https://img.shields.io/badge/Demo-Live%20Now-brightgreen)](https://jubayer11.github.io/vue-dynamic-form-builder/)  
+[![npm](https://img.shields.io/npm/v/@jubayer11/vue-dynamic-form-builder)](https://www.npmjs.com/package/@jubayer11/vue-dynamic-form-builder)  
+
+
 
 
 <!-- Divider after badges -->
@@ -194,13 +196,13 @@ Each field type can be customized individually for label, placeholder, validatio
 ## 📦 Installation
 
 ```bash
-npm install @jubayer/vue-dynamic-form-builder
+npm install @jubayer11/vue-dynamic-form-builder
 ```
 
 or, if you are testing it locally:
 
 ```bash
-git clone https://github.com/your-username/vue-dynamic-form-builder.git
+git clone https://github.com/jubayer11/vue-dynamic-form-builder.git
 cd vue-dynamic-form-builder
 npm install
 ```
@@ -748,18 +750,20 @@ Each example is available inside the `demo/` folder.
 | **Popup Form in Modal** | Full form handling inside a modal |
 | **All Date/Time Picker Modes** | Supports date, time, month, week, and year picking |
 
-🔗 **Live Demo**: Coming Soon
+🔗 **Live Demo**: [https://jubayer11.github.io/vue-dynamic-form-builder/](https://jubayer11.github.io/vue-dynamic-form-builder/)
+
 
 ### 📂 Where to Find Demo Files
 
 | Demo | File Location |
 |:---|:---|
-| Basic Prefilled Form | `demo/DemoPrefilledForm.vue` |
-| Row/Column Layout Form | `demo/DemoRowForm.vue` |
-| Manual Submit + Custom Buttons | `demo/DemoManualSubmitForm.vue` |
-| Custom Styling per Field | `demo/DemoCustomStyleForm.vue` |
-| Popup Form in Modal | `demo/DemoPopupForm.vue` |
-| All Date/Time Picker Modes | `demo/DemoDateForm.vue` |
+| **Basic Prefilled Form** | `src/demo/components/demo/DemoPrefilledForm.vue` |
+| **Row/Column Layout Form** | `src/demo/components/demo/DemoRowForm.vue` |
+| **Manual Submit + Custom Buttons** | `src/demo/components/demo/DemoManualSubmitForm.vue` |
+| **Custom Styling per Field** | `src/demo/components/demo/DemoCustomStyleForm.vue` |
+| **Popup Form in Modal** | `src/demo/components/demo/DemoPopupForm.vue` |
+| **All Date/Time Picker Modes** | `src/demo/components/demo/DemoDateForm.vue` |
+
 
 ✅ Demos are real-world, production-grade examples.
 
