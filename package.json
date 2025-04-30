@@ -21,10 +21,10 @@
   },
   "homepage": "https://jubayer11.github.io/vue-dynamic-form-builder/",
   "scripts": {
-    "dev": "vite",
-    "build": "vite build",
-    "preview": "vite preview",
-    "deploy": "vite build && gh-pages -d dist"
+    "dev": "vite --config vite.config.docs.js",
+    "build:docs": "vite build --config vite.config.docs.js",
+    "build:lib": "vite build --config vite.config.lib.js",
+    "deploy": "npm run build:docs && gh-pages -d dist"
   },
   "dependencies": {
     "@vuelidate/core": "^2.0.3",
