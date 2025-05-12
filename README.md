@@ -5,6 +5,8 @@
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)  
 [![Live Demo](https://img.shields.io/badge/Demo-Live%20Now-brightgreen)](https://jubayer11.github.io/vue-dynamic-form-builder/)  
 [![npm](https://img.shields.io/npm/v/@jubayer11/vue-dynamic-form-builder)](https://www.npmjs.com/package/@jubayer11/vue-dynamic-form-builder)  
+[![GitHub](https://img.shields.io/github/stars/jubayer11/vue-dynamic-form-builder?style=social)](https://github.com/jubayer11/vue-dynamic-form-builder)  
+[![Related Package](https://img.shields.io/badge/Also%20Check-Vue%20Dynamic%20Table%20Builder-orange)](https://www.npmjs.com/package/@jubayer11/vue-dynamic-table-builder)
 
 
 
@@ -835,6 +837,16 @@ Designed and developed with ❤️ by **Jubayer Ahmed** ([Portfolio](https://www
 - Inspired by real-world problems, built for serious developers
 
 <!-- Divider after Final Touches -->
+---
+---
+
+## 🔗 Related Projects
+
+Looking for a customizable, fully responsive table to pair with your Vue app?
+
+👉 Check out [`@jubayer11/vue-dynamic-table-builder`](https://www.npmjs.com/package/@jubayer11/vue-dynamic-table-builder)  
+A powerful Vue 3 table builder with pagination, action buttons, responsive columns, expandable rows, and deep style/config customization.
+
 ---
 
 ✨ End of README ✨

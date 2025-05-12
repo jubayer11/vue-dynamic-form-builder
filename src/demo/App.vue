@@ -84,6 +84,14 @@
     </main>
 
     <footer class="dfdemo__footer">
+      <div class="footer-promo">
+        📊 Also explore my
+        <a href="https://github.com/jubayer11/vue-dynamic-table-builder" target="_blank" rel="noopener">
+          Vue Dynamic Table Builder
+        </a>
+        — Create flexible, feature-rich tables with pagination, responsive columns, and deep style control.
+      </div>
+
       <div class="dfdemo__branding">
         <a class="dfdemo__author" href="https://jubayerahmed.com/" target="_blank"> <strong>Jubayer Ahmed</strong> </a>
         <span>•</span>
@@ -244,6 +252,21 @@ html, body {
   font-size: 0.85em;
 }
 
+.footer-promo {
+  margin: 1rem auto;
+  max-width: 600px;
+  font-size: 0.9rem;
+  color: #4b5563;
+  line-height: 1.5;
+}
+.footer-promo a {
+  color: #2563eb;
+  font-weight: 600;
+  text-decoration: none;
+}
+.footer-promo a:hover {
+  text-decoration: underline;
+}
 /* ====== Animations ====== */
 @keyframes fadeIn {
   0% { opacity: 0; transform: translateY(20px); }
